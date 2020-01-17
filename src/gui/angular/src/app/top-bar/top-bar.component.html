@@ -1,0 +1,6 @@
+<a [routerLink]="['/']">
+  <h1>Portal randkowy</h1>
+</a>
+
+{{userLoggedContext}}
+<h1 *ngIf="userLoggedContext" (click)="logout()">WYLOGUJ</h1>
