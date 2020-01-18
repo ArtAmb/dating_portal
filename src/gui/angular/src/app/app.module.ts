@@ -13,6 +13,8 @@ import { ToastrModule } from "ngx-toastr";
 import { LeftBarComponent } from "./left-bar/left-bar.component";
 import { RightBarComponent } from "./right-bar/right-bar.component";
 import { HttpRequestInterceptor } from "./interceptors/http-credential-interceptor";
+import { APP_ROUTES } from "./routes";
+import { MainViewComponent } from "./main-view/main-view/main-view.component";
 
 @NgModule({
   imports: [
@@ -26,14 +28,15 @@ import { HttpRequestInterceptor } from "./interceptors/http-credential-intercept
       timeOut: 1500
       // positionClass: 'toast-bottom-right'
     }),
-    RouterModule.forRoot([{ path: "", component: LoginComponentComponent }])
+    RouterModule.forRoot(APP_ROUTES)
   ],
   declarations: [
     AppComponent,
     TopBarComponent,
     LoginComponentComponent,
     LeftBarComponent,
-    RightBarComponent
+    RightBarComponent,    
+    MainViewComponent
   ],
   bootstrap: [AppComponent],
   providers: [

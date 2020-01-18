@@ -22,7 +22,6 @@ public class AppUser {
 
     @Column(unique = true, nullable = false)
     private String login;
-    private String displayLogin;
 
     @Column(nullable = false)
     private String password;

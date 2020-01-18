@@ -1,0 +1,7 @@
+<div *ngIf="!isAuthenticated()">
+  <app-login-component></app-login-component>
+</div>
+
+<div *ngIf="isAuthenticated()">
+  Hello Darkness, my old friednd!
+</div>
