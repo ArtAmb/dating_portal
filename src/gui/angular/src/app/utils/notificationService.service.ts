@@ -20,8 +20,10 @@ constructor(private toastr: ToastrService) { }
 
   public failure(err = null) {
     console.log(err);
-
-    var msg = err && err!.error!.message
+    var msg = null;
+    if(err && err.error && err && err.error.message)
+      msg = err.error.message;
+     
     if (msg == null) {
       this.toastr.error("Nikt nie spodziewał się hiszpańskiej inkwizycji");
     } else {

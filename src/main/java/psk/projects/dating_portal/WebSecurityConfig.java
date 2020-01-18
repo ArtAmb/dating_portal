@@ -2,6 +2,7 @@ package psk.projects.dating_portal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,11 +42,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(new SimpleUrlAuthenticationFailureHandler() {
 
             @Override
-            public void onAuthenticationFailure(HttpServletRequest arg0, HttpServletResponse arg1,
+            public void onAuthenticationFailure(HttpServletRequest arg0, HttpServletResponse response,
                                                 AuthenticationException arg2) throws IOException, ServletException {
 //                arg1.sendRedirect("/view/sign-in-error");
                 System.out.println(arg2);
                 System.out.println("Authentication Failure");
+                response.sendError(HttpStatus.UNAUTHORIZED.value(),
+                        HttpStatus.UNAUTHORIZED.getReasonPhrase());
 
             }
         }).successHandler(new SimpleUrlAuthenticationSuccessHandler() {
