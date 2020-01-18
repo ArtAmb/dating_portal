@@ -11,9 +11,27 @@ export class TopBarComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService) { }
 
   public userLoggedContext = false;
+  public eventmsg = "";
+
+  isAuthenticated()
+  {
+    return this.authenticationService.isAuthenticated();
+  }
 
   ngOnInit() {
+
+    if(this.authenticationService.isAuthenticated())
+    {
+      this.userLoggedContext = true;
+
+    }
+    else
+    {
+      this.userLoggedContext = false;
+    }
+/*
     this.authenticationService.getSubscriber().subscribe(event => {
+
       if(event == "LOGIN") {
         this.userLoggedContext = true;
       }
@@ -21,6 +39,8 @@ export class TopBarComponent implements OnInit {
         this.userLoggedContext = false;
       }
     })
+    */
+
   }
 
   logout() {
