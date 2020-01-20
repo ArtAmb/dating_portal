@@ -10,6 +10,7 @@ import {
 } from "@angular/common/http";
 import { environment } from "./../../environments/environment";
 import { Observable, BehaviorSubject } from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: "root"
@@ -17,7 +18,8 @@ import { Observable, BehaviorSubject } from "rxjs";
 export class AuthenticationService {
   constructor(
     private notifyService: NotificationService,
-    private http: HttpClient
+    private http: HttpClient,
+    private router : Router
   ) {}
 
   ENV = environment;
@@ -52,6 +54,8 @@ export class AuthenticationService {
         this.notifyService.success("Wylogowano pomyślnie");
         localStorage.setItem(this.AUTH_KEY, "false");
         this._behaviorSubject.next("LOGOUT");
+
+        this.router.navigate(['']);
       },
       err => {
         this.notifyService.failure(err);

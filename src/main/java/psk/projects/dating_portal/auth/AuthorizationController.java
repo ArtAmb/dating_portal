@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import psk.projects.dating_portal.profil.UserProfil;
+import psk.projects.dating_portal.profil.UserProfilRepository;
 
 import java.util.Collections;
 
@@ -17,6 +19,7 @@ import java.util.Collections;
 public class AuthorizationController {
 
     private final UserRepository userRepository;
+    private final UserProfilRepository userProfilRepository;
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @PostMapping("/register")
@@ -34,5 +37,8 @@ public class AuthorizationController {
         user.setPassword(encoder.encode(rawPass));
         user.setRoles(Collections.singletonList(Roles.ROLE_NORMAL.toRole()));
         userRepository.save(user);
+
+        userProfilRepository.save(UserProfil.builder().displayLogin(user.getLogin()).description("to jest nowy użytkownik").userId(user.getId()).build());
     }
+
 }

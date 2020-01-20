@@ -1,0 +1,26 @@
+<div *ngIf="!isAuthenticated()">
+    <app-login-component></app-login-component>
+</div>
+
+<div *ngIf="isAuthenticated()">
+
+    <p>
+        Tutaj możesz edytować swój profil.
+    </p>
+
+
+    <div class="row">
+        <input  [(ngModel)]="profil.displayLogin" placeholder="Nazwa" />
+    </div>
+
+
+    <div class="row">
+        <input  [(ngModel)]="profil.description" placeholder="Opis" />
+    </div>
+
+
+        <button (click)="save()">Aktualizuj</button>
+
+
+
+</div>

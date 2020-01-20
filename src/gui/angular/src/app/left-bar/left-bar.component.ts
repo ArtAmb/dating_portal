@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from "../login-component/Authentication.service";
 
 @Component({
   selector: 'app-left-bar',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService : AuthenticationService) { }
+  isAuthenticated()
+  {
+    return this.authService.isAuthenticated();
+  }
 
   ngOnInit() {
   }

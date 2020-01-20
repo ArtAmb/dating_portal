@@ -22,6 +22,7 @@ import {
   ImageDialogComponent
 } from "./main-view/main-view/gallery/image/image.component";
 import { MatDialogModule } from "@angular/material/dialog";
+import {ProfilEditComponent} from "./profil-edit/profil-edit.component";
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     GalleryComponent,
     ImageDialogComponent,
     UserImagesComponent,
-    ImageComponent
+    ImageComponent,
+      ProfilEditComponent
   ],
   bootstrap: [AppComponent],
   providers: [
