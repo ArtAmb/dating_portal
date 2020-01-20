@@ -1,0 +1,15 @@
+cdk-overlay-pane {
+  width: unset !important;
+  height: unset !important;
+  max-width: 100% !important;
+}
+
+mat-dialog-container {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  resize: both !important;
+}
+
+mat-dialog-content {
+  display: inline-flex !important;
+}

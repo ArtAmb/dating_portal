@@ -1,0 +1,16 @@
+
+<h2 class = "row">Galeria</h2>
+<div class = "row" *ngFor="let oneGallery of allGalleries">
+  <app-gallery [gallery]="oneGallery"></app-gallery>
+</div>
+
+<div class = "row" *ngIf="newGalleryModeEnable">
+  <input [(ngModel)]="galleryName" placeholder="nazwa" />
+
+  <button (click)="addNewGallery()">Dodaj galerie</button>
+</div>
+
+<button class = "row" *ngIf="!newGalleryModeEnable" (click)="enableNewGallery()">
+  Nowa galeria
+</button>
+

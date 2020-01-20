@@ -1,7 +1,24 @@
 /* Global Styles */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.material-icons.md-18 {
+  font-size: 18px;
+}
+.material-icons.md-24 {
+  font-size: 24px;
+}
+.material-icons.md-36 {
+  font-size: 36px;
+}
+.material-icons.md-48 {
+  font-size: 48px;
+}
+.material-icons.clickable {
+  cursor: pointer;
+}
 
 * {
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   color: #616161;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -12,12 +29,7 @@ body {
   margin: 0;
 }
 
-.container {
-  display: flex;
-  flex-direction: row;
-}
-
-router-outlet + *  {
+router-outlet + * {
   padding: 0 16px;
 }
 
@@ -31,7 +43,8 @@ h2 {
   font-size: 20px;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-weight: lighter;
 }
 
@@ -58,7 +71,7 @@ input {
   border-radius: 2px;
   padding: 8px;
   margin-bottom: 16px;
-  border: 1px solid #BDBDBD;
+  border: 1px solid #bdbdbd;
 }
 
 label {
@@ -70,7 +83,8 @@ label {
 }
 
 /* Button */
-.button, button {
+.button,
+button {
   display: inline-flex;
   align-items: center;
   padding: 8px 16px;
@@ -82,12 +96,14 @@ label {
   border: none;
 }
 
-.button:hover, button:hover {
+.button:hover,
+button:hover {
   opacity: 0.8;
   font-weight: normal;
 }
 
-.button:disabled, button:disabled {
+.button:disabled,
+button:disabled {
   opacity: 0.5;
   cursor: auto;
 }
@@ -109,6 +125,7 @@ label {
 app-top-bar {
   width: 100%;
   height: 68px;
+  position: fixed;
   background-color: #1976d2;
   padding: 16px;
   display: flex;
@@ -122,28 +139,26 @@ app-top-bar h1 {
   margin: 0;
 }
 
-
 app-left-bar {
-  height: 100%; 
+  height: 100%;
   width: 8%;
-  position: fixed; 
-  z-index: 1; 
-  top: 68px; 
+  position: fixed;
+  z-index: 1;
+  top: 68px;
   left: 0;
   background-color: #0b6075;
-  overflow-x: hidden; 
-  padding-top: 60px; 
-  transition: 0.5s; 
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
 }
 
-app-right-bar {   
+app-right-bar {
   height: 100%;
   width: 10%;
   position: fixed;
   z-index: 1;
-  top: 0;
   right: 0;
-  top: 68px; 
+  top: 68px;
   background-color: #0b6075;
   overflow-x: hidden;
   transition: 0.5s;
@@ -151,5 +166,7 @@ app-right-bar {
 }
 
 .main-content {
-  padding: 16px;
+  padding-top: 68px;
+  padding-left: 12%;
+  width: 82%;
 }

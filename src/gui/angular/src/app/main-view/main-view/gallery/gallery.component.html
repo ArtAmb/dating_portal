@@ -1,0 +1,29 @@
+<div class="row">
+  <span class="row" *ngIf="!galleryEditionEnable">
+    <h4 style="padding-right: 10px;">{{ gallery.title }}</h4>
+    <i class="material-icons md-18 clickable" (click)="enableGalleryEdition()">edit</i>
+  </span>
+  <span class="row" *ngIf="galleryEditionEnable">
+    <input [(ngModel)]="newGalleryName"/>
+    <i class="material-icons md-18 clickable" (click)="saveGallery()">check</i>
+    <i class="material-icons md-18 clickable" (click)="disableGalleryEdition()">cancel</i>
+  </span>
+</div>
+<div class="gallery row">
+  <span *ngFor="let oneImage of gallery.images" class="image-container">
+    <app-image [image]="oneImage"></app-image>
+  </span>
+</div>
+
+<div class="row">
+  <input
+    class="row"
+    type="file"
+    [(ngModel)]="file"
+    (change)="onFileChanged($event)"
+  />
+
+  <img class="row" *ngIf="imageBase64" class="image" src="{{ imageBase64 }}" />
+  <input class="row" [(ngModel)]="description" />
+  <button class="row" (click)="publish()">Dodaj</button>
+</div>

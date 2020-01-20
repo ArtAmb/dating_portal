@@ -15,11 +15,19 @@ import { RightBarComponent } from "./right-bar/right-bar.component";
 import { HttpRequestInterceptor } from "./interceptors/http-credential-interceptor";
 import { APP_ROUTES } from "./routes";
 import { MainViewComponent } from "./main-view/main-view/main-view.component";
+import { GalleryComponent } from "./main-view/main-view/gallery/gallery.component";
+import { UserImagesComponent } from "./main-view/main-view/user-images/user-images.component";
+import {
+  ImageComponent,
+  ImageDialogComponent
+} from "./main-view/main-view/gallery/image/image.component";
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
+    MatDialogModule,
     ReactiveFormsModule,
     NgbModule,
     FormsModule,
@@ -35,8 +43,12 @@ import { MainViewComponent } from "./main-view/main-view/main-view.component";
     TopBarComponent,
     LoginComponentComponent,
     LeftBarComponent,
-    RightBarComponent,    
-    MainViewComponent
+    RightBarComponent,
+    MainViewComponent,
+    GalleryComponent,
+    ImageDialogComponent,
+    UserImagesComponent,
+    ImageComponent
   ],
   bootstrap: [AppComponent],
   providers: [
@@ -45,7 +57,8 @@ import { MainViewComponent } from "./main-view/main-view/main-view.component";
       useClass: HttpRequestInterceptor,
       multi: true
     }
-  ]
+  ],
+  entryComponents: [ImageComponent, ImageDialogComponent]
 })
 export class AppModule {}
 // RouterModule.forRoot([{ path: '', component: LoginComponentComponent }])

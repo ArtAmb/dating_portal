@@ -8,10 +8,12 @@ import { AuthenticationService } from "src/app/login-component/Authentication.se
 })
 export class MainViewComponent implements OnInit {
   constructor(private authService: AuthenticationService) {}
+  
 
   ngOnInit() {}
 
   isAuthenticated() {
     return this.authService.isAuthenticated();
   }
+
 }
