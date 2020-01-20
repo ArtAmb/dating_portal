@@ -22,6 +22,7 @@ import {
   ImageDialogComponent
 } from "./main-view/main-view/gallery/image/image.component";
 import { MatDialogModule } from "@angular/material/dialog";
+import { UserAvatarComponent } from "./main-view/main-view/user-avatar/user-avatar.component";
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     GalleryComponent,
     ImageDialogComponent,
     UserImagesComponent,
+    UserAvatarComponent,
     ImageComponent
   ],
   bootstrap: [AppComponent],

@@ -25,9 +25,10 @@ class UploadImageDTO {
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-class ChangeGalleryName {
+class UpdateGalleryDTO {
     Long galleryId;
     String galleryName;
+    GalleryAccessibility accessScope;
 }
 
 @Builder
@@ -43,6 +44,7 @@ class AddGalleryDTO {
 @AllArgsConstructor
 public class GalleryController {
     private final GalleryService galleryService;
+    private final UserProfilService userProfilService;
 
     @GetMapping("user/galleries")
     public List<Gallery> findGalleries(Principal principal) {
@@ -55,14 +57,19 @@ public class GalleryController {
         galleryService.addNewGallery(dto, principal.getName());
     }
 
-    @PostMapping("gallery/change-name")
-    public void changeGalleryName(@RequestBody ChangeGalleryName changeGalleryName) {
-        galleryService.changeGalleryName(changeGalleryName);
+    @PostMapping("gallery/update")
+    public void changeGalleryName(@RequestBody UpdateGalleryDTO updateGalleryDTO) {
+        galleryService.updateGallery(updateGalleryDTO);
     }
 
     @PostMapping("upload-image")
     public ImageInfo publishImage(@ModelAttribute UploadImageDTO dto, Principal principal) throws IOException {
         return galleryService.publishImage(dto);
+    }
+
+    @PostMapping("upload-avatar-image")
+    public ImageInfo publishAvatarImage(@ModelAttribute MultipartFile file, Principal principal) throws IOException {
+        return userProfilService.publishAvatar(file, principal);
     }
 
     @GetMapping("image/{imageId}")

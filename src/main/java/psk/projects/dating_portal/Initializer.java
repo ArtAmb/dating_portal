@@ -6,16 +6,13 @@ import org.springframework.stereotype.Component;
 import psk.projects.dating_portal.auth.*;
 
 import javax.annotation.PostConstruct;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class Initializer {
 
-    private final UserRepository userRepo;
     private final RoleRepository roleRepo;
+    private final CreateUserService createUserService;
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @PostConstruct
@@ -28,18 +25,11 @@ public class Initializer {
             roleRepo.save(role);
         }
 
-        List<Role> developerRoles = new LinkedList<>();
-        developerRoles.add(Roles.ROLE_ADMIN.toRole());
-        developerRoles.add(Roles.ROLE_NORMAL.toRole());
-        userRepo.deleteAll();
-
-        userRepo.save(AppUser.builder().login("admin").email("admin@test.pl")
-                .password(encoder.encode("test")).roles(developerRoles).build());
-
-        userRepo.save(AppUser.builder().login("normal").email("normal@test.pl")
-                .password(encoder.encode("test")).roles(Collections.singletonList(Roles.ROLE_NORMAL.toRole())).build());
-
-
+//        createUserService.createAdmin(AppUser.builder().login("admin").email("admin@test.pl")
+//                .password(encoder.encode("test")).build());
+//
+//        createUserService.createUser(AppUser.builder().login("normal").email("normal@test.pl")
+//                .password(encoder.encode("test")).build());
     }
 
 

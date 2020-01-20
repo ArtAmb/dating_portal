@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { GalleryService } from "./gallery.service";
 import { NotificationService } from "src/app/utils/notificationService.service";
-import { Gallery } from "../user-images/user-images.component";
+import { Gallery, GalleryAccessibility } from "../user-images/user-images.component";
 
 @Component({
   selector: "app-gallery",
@@ -18,6 +18,7 @@ export class GalleryComponent implements OnInit {
 
   galleryEditionEnable = false;
   newGalleryName = null;
+  newGalleryAccessScope: GalleryAccessibility = null;
 
   imageBase64 = null;
   file: File = null;
@@ -60,26 +61,29 @@ export class GalleryComponent implements OnInit {
 
   enableGalleryEdition() {
     this.newGalleryName = this.gallery.title;
+    this.newGalleryAccessScope = this.gallery.accessScope;
     this.galleryEditionEnable = true;
   }
 
   disableGalleryEdition() {
     this.newGalleryName = null;
+    this.newGalleryAccessScope = null;
     this.galleryEditionEnable = false;
   }
 
   saveGallery() {
     this.galleryService
-      .changeGalleryName({
+      .updateGallery({
         galleryId: this.gallery.id,
-        galleryName: this.newGalleryName
+        galleryName: this.newGalleryName,
+        accessScope: this.newGalleryAccessScope
       })
       .subscribe(
         res => {
           this.notificationService.success("Nazwa zmieniona");
           this.gallery.title = this.newGalleryName;
-          this.galleryEditionEnable = false;
-          this.newGalleryName = null;
+          this.gallery.accessScope = this.newGalleryAccessScope;
+          this.disableGalleryEdition();
         },
         err => this.notificationService.failure(err)
       );

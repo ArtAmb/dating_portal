@@ -1,10 +1,15 @@
 <div class="row">
   <span class="row" *ngIf="!galleryEditionEnable">
     <h4 style="padding-right: 10px;">{{ gallery.title }}</h4>
+    <span>{{gallery.accessScope}}</span>
     <i class="material-icons md-18 clickable" (click)="enableGalleryEdition()">edit</i>
   </span>
   <span class="row" *ngIf="galleryEditionEnable">
     <input [(ngModel)]="newGalleryName"/>
+    <select [(ngModel)]="newGalleryAccessScope">
+        <option value="PRIVATE">Prywatna</option>
+        <option value="PUBLIC">Publiczna</option>
+    </select>
     <i class="material-icons md-18 clickable" (click)="saveGallery()">check</i>
     <i class="material-icons md-18 clickable" (click)="disableGalleryEdition()">cancel</i>
   </span>

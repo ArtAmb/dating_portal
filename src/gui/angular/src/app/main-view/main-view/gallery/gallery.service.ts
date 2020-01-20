@@ -26,8 +26,12 @@ export class GalleryService {
     return this.httpClient.post(environment.server_url + "/user/galleries/add", dto);
   }
   
-  public changeGalleryName(dto: any): Observable<any>  {
-    return this.httpClient.post(environment.server_url + "/gallery/change-name", dto);
+  public updateGallery(dto: any): Observable<any>  {
+    return this.httpClient.post(environment.server_url + "/gallery/update", dto);
+  }
+
+  public publishAvatarImage(dto: any): Observable<any>  {
+    return this.httpClient.post(environment.server_url + "/upload-avatar-image", dto);
   }
   
 }

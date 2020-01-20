@@ -1,0 +1,15 @@
+<div *ngIf="avatarImage">
+  <app-image [image]="avatarImage"></app-image>
+</div>
+
+<div class="row">
+  <input
+    class="row"
+    type="file"
+    [(ngModel)]="image"
+    (change)="onFileChanged($event)"
+  />
+
+  <img class="row" *ngIf="imageBase64" class="image" src="{{ imageBase64 }}" />
+  <button class="row" (click)="publish()">Dodaj profilowe</button>
+</div>

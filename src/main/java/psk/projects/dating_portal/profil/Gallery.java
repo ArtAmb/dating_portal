@@ -22,6 +22,9 @@ public class Gallery {
 
     private String title;
 
+    @Enumerated
+    private GalleryAccessibility accessScope;
+
     @OneToMany
     private List<ImageInfo> images;
 }

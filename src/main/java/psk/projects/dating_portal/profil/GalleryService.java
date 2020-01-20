@@ -3,11 +3,13 @@ package psk.projects.dating_portal.profil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.web.multipart.MultipartFile;
 import psk.projects.dating_portal.auth.AppUser;
 import psk.projects.dating_portal.auth.UserRepository;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -15,6 +17,7 @@ import java.util.List;
 public class GalleryService {
     private final GalleryRepository galleryRepository;
     private final UserRepository userRepository;
+    private final UserProfilRepo userProfilRepo;
     private final ImageRepository imageRepository;
     private final ImageInfoRepository imageInfoRepository;
 
@@ -75,21 +78,23 @@ public class GalleryService {
         Gallery gallery = Gallery.builder()
                 .title(dto.getGalleryName())
                 .userId(user.getId())
+                .accessScope(GalleryAccessibility.PUBLIC)
                 .build();
 
         galleryRepository.save(gallery);
     }
 
-    public void changeGalleryName(ChangeGalleryName changeGalleryName) {
-        Assert.notNull(changeGalleryName, "changeGalleryName is req");
-        Assert.notNull(changeGalleryName.getGalleryName(), "GalleryName is req");
-        Assert.notNull(changeGalleryName.getGalleryId(), "GalleryId is req");
-        if (changeGalleryName.getGalleryName().trim().isEmpty()) {
+    public void updateGallery(UpdateGalleryDTO updateGalleryDTO) {
+        Assert.notNull(updateGalleryDTO, "updateGalleryDTO is req");
+        Assert.notNull(updateGalleryDTO.getGalleryName(), "GalleryName is req");
+        Assert.notNull(updateGalleryDTO.getGalleryId(), "GalleryId is req");
+        if (updateGalleryDTO.getGalleryName().trim().isEmpty()) {
             throw new IllegalStateException("GalleryName cannot be empty");
         }
 
-        Gallery gallery = galleryRepository.findById(changeGalleryName.getGalleryId()).get();
-        gallery.setTitle(changeGalleryName.getGalleryName());
+        Gallery gallery = galleryRepository.findById(updateGalleryDTO.getGalleryId()).get();
+        gallery.setTitle(updateGalleryDTO.getGalleryName());
         galleryRepository.save(gallery);
     }
+
 }

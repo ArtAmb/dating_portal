@@ -16,23 +16,10 @@ import java.util.Collections;
 @CrossOrigin("http://localhost:4200")
 public class AuthorizationController {
 
-    private final UserRepository userRepository;
-    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private final CreateUserService userService;
 
     @PostMapping("/register")
     public void register(@RequestBody AppUser user) {
-        Assert.notNull(user.getLogin(), "login is required");
-        Assert.notNull(user.getPassword(), "password is required");
-        Assert.notNull(user.getEmail(), "email is required");
-
-        long count = userRepository.countByLogin(user.getLogin());
-
-        if (count > 0)
-            throw new IllegalStateException("There is user with login == " + user.getLogin());
-
-        String rawPass = user.getPassword();
-        user.setPassword(encoder.encode(rawPass));
-        user.setRoles(Collections.singletonList(Roles.ROLE_NORMAL.toRole()));
-        userRepository.save(user);
+       userService.createUser(user);
     }
 }

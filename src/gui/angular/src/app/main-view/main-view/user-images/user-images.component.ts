@@ -10,7 +10,13 @@ export class ImageInfo {
 export class Gallery {
   id: Number;
   title: Number;
+  accessScope: GalleryAccessibility;
   images: Array<ImageInfo>;
+}
+
+export enum GalleryAccessibility {
+  PRIVATE = "PRIVATE",
+  PUBLIC = "PUBLIC"
 }
 
 @Component({
@@ -45,7 +51,7 @@ export class UserImagesComponent implements OnInit {
   addNewGallery() {
     this.galleryService
       .addNewGallery({
-        "galleryName": this.galleryName
+        galleryName: this.galleryName
       })
       .subscribe(
         res => {
