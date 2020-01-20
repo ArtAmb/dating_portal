@@ -14,16 +14,30 @@ import java.security.Principal;
 @Service
 @AllArgsConstructor
 public class UserProfilService {
-    private final UserProfilRepo userProfilRepo;
-    private final UserRepository userRepo;
+    private final UserRepository userRepository;
+    private final UserProfilRepo userProfilRepository;
     private final ImageRepository imageRepository;
 
+    public UserProfil findByUser(String userLogin) {
+        AppUser user = findUserByLogin(userLogin);
 
-    public UserProfil findProfil(Principal principal) {
-        long userId = findUserByLogin(principal.getName()).getId();
-        UserProfil profil = userProfilRepo.findByUserId(userId);
+        return userProfilRepository.findByUserId(user.getId());
+    }
 
-        return profil;
+    private AppUser findUserByLogin(String userLogin) {
+        Assert.notNull(userLogin, "userLogin is required");
+        AppUser user = userRepository.findByLogin(userLogin);
+        if (user == null)
+            throw new IllegalStateException("User not found for login " + userLogin);
+        return user;
+    }
+
+    public void updateUserProfil(UserProfil updatedUserProfil) {
+        UserProfil profil = userProfilRepository.findByUserId(updatedUserProfil.getUserId());
+        profil.setDisplayLogin(updatedUserProfil.getDisplayLogin());
+        profil.setDescription(updatedUserProfil.getDescription());
+
+        userProfilRepository.save(profil);
     }
 
     @Transactional
@@ -36,9 +50,9 @@ public class UserProfilService {
 
         AppUser user = findUserByLogin(principal.getName());
 
-        UserProfil userProfil = userProfilRepo.findByUserId(user.getId());
+        UserProfil userProfil = userProfilRepository.findByUserId(user.getId());
         userProfil.setAvatarImageId(imageId);
-        userProfilRepo.save(userProfil);
+        userProfilRepository.save(userProfil);
 
         return ImageInfo.builder()
                 .imageId(imageId)
@@ -46,11 +60,11 @@ public class UserProfilService {
                 .build();
     }
 
-    private AppUser findUserByLogin(String userLogin) {
-        Assert.notNull(userLogin, "userLogin is required");
-        AppUser user = userRepo.findByLogin(userLogin);
-        if (user == null)
-            throw new IllegalStateException("User not found for login " + userLogin);
-        return user;
+    public UserProfil findProfil(Principal principal) {
+        long userId = findUserByLogin(principal.getName()).getId();
+        UserProfil profil = userProfilRepository.findByUserId(userId);
+
+        return profil;
     }
+
 }

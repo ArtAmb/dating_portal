@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class UserProfil {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,5 +22,6 @@ public class UserProfil {
     private String displayLogin;
 
     private Long avatarImageId;
+    private String description;
 
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import psk.projects.dating_portal.profil.UserProfil;
+import psk.projects.dating_portal.profil.UserProfilRepository;
 
 import java.util.Collections;
 

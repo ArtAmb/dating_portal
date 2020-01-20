@@ -13,6 +13,7 @@ public class Initializer {
 
     private final RoleRepository roleRepo;
     private final CreateUserService createUserService;
+    private final UserRepository userRepo;
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @PostConstruct
@@ -25,11 +26,12 @@ public class Initializer {
             roleRepo.save(role);
         }
 
-//        createUserService.createAdmin(AppUser.builder().login("admin").email("admin@test.pl")
-//                .password(encoder.encode("test")).build());
-//
-//        createUserService.createUser(AppUser.builder().login("normal").email("normal@test.pl")
-//                .password(encoder.encode("test")).build());
+        userRepo.deleteAll();
+        createUserService.createAdmin(AppUser.builder().login("admin").email("admin@test.pl")
+                .password(encoder.encode("test")).build());
+
+        createUserService.createUser(AppUser.builder().login("normal").email("normal@test.pl")
+                .password(encoder.encode("test")).build());
     }
 
 

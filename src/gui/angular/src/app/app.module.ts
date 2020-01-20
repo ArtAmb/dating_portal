@@ -22,6 +22,7 @@ import {
   ImageDialogComponent
 } from "./main-view/main-view/gallery/image/image.component";
 import { MatDialogModule } from "@angular/material/dialog";
+import {ProfilEditComponent} from "./profil-edit/profil-edit.component";
 import { UserAvatarComponent } from "./main-view/main-view/user-avatar/user-avatar.component";
 
 @NgModule({
@@ -50,7 +51,9 @@ import { UserAvatarComponent } from "./main-view/main-view/user-avatar/user-avat
     ImageDialogComponent,
     UserImagesComponent,
     UserAvatarComponent,
-    ImageComponent
+    ImageComponent.
+    ImageComponent,
+    ProfilEditComponent
   ],
   bootstrap: [AppComponent],
   providers: [
