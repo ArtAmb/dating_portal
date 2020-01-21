@@ -51,7 +51,6 @@ import { UserAvatarComponent } from "./main-view/main-view/user-avatar/user-avat
     ImageDialogComponent,
     UserImagesComponent,
     UserAvatarComponent,
-    ImageComponent.
     ImageComponent,
     ProfilEditComponent
   ],

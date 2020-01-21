@@ -1,6 +1,5 @@
 package psk.projects.dating_portal.auth;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -50,7 +49,9 @@ public class CreateUserService {
 
         UserProfil userProfil = UserProfil.builder()
                 .userId(userId)
-                .displayLogin(user.getLogin()).build();
+                .displayLogin(user.getLogin())
+                .description("to jest nowy użytkownik")
+                .build();
 
         userProfilRepo.save(userProfil);
     }
