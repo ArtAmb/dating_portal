@@ -36,6 +36,8 @@ public class UserProfilService {
         UserProfil profil = userProfilRepository.findByUserId(updatedUserProfil.getUserId());
         profil.setDisplayLogin(updatedUserProfil.getDisplayLogin());
         profil.setDescription(updatedUserProfil.getDescription());
+        profil.setBirthDate(updatedUserProfil.getBirthDate());
+        profil.setGender(updatedUserProfil.getGender());
 
         userProfilRepository.save(profil);
     }

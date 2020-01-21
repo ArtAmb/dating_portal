@@ -18,6 +18,17 @@
         <input  [(ngModel)]="profil.description" placeholder="Opis" />
     </div>
 
+    <div class="row">
+        <input type="date"  [(ngModel)]="profil.birthDate" />
+    </div>
+    <div class="row">
+        <select name="" id="" [(ngModel)]="profil.gender" >
+            <option value="Female">Kobieta</option>
+            <option value="Male">Mężczyzna</option>
+            <option value="None">Brak</option>
+        </select>
+    </div>
+
 
         <button (click)="save()">Aktualizuj</button>
 

@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import psk.projects.dating_portal.profil.GENDER;
 import psk.projects.dating_portal.profil.UserProfil;
 import psk.projects.dating_portal.profil.UserProfilRepo;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -51,6 +53,8 @@ public class CreateUserService {
                 .userId(userId)
                 .displayLogin(user.getLogin())
                 .description("to jest nowy użytkownik")
+                .birthDate(new Date())
+                .gender(GENDER.None)
                 .build();
 
         userProfilRepo.save(userProfil);

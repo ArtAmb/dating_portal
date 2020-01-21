@@ -3,10 +3,21 @@ import {AuthenticationService} from "../login-component/Authentication.service";
 import {ProfilEditService} from "./profil-edit-service.component";
 import {NotificationService} from "../utils/notificationService.service";
 
+
+
 export class Profil{
     id :Number;
     displayLogin : Text;
     description : Text;
+    birthDate : Date;
+    gender : GENDER;
+
+}
+
+export enum GENDER {
+    Male = 1,
+    Female = 2,
+    None = 3
 }
 
 @Component({
@@ -21,6 +32,7 @@ export class ProfilEditComponent implements OnInit {
 
     ngOnInit() {
         this.profilEditService.findUserProfil().subscribe(res=>{this.profil= res});
+
     }
 
     isAuthenticated() {
@@ -29,6 +41,8 @@ export class ProfilEditComponent implements OnInit {
 
 
     }
+
+
 
     save()
     {
