@@ -1,11 +1,4 @@
-<p>
-  left-bar works!
-</p>
-
-<p>
-  KONF
-</p>
-<div *ngIf="isAuthenticated()">
-
-  <a routerLink="/profil-edit">Edycja profilu</a>
+<div class="container" *ngIf="isAuthenticated()">
+  <a *ngIf="isAdmin()" class="row" routerLink="/configuration">Konfiguracja</a>
+  <a class="row" routerLink="/profil-edit">Edycja profilu</a>
 </div>

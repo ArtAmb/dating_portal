@@ -28,10 +28,10 @@ public class Initializer {
 
         userRepo.deleteAll();
         createUserService.createAdmin(AppUser.builder().login("admin").email("admin@test.pl")
-                .password(encoder.encode("test")).build());
+                .password("test").build());
 
         createUserService.createUser(AppUser.builder().login("normal").email("normal@test.pl")
-                .password(encoder.encode("test")).build());
+                .password("test").build());
     }
 
 

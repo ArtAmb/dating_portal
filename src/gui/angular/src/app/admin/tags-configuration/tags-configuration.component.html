@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col" *ngFor="let oneTagsCategory of allTagsCategory">
+    <app-tags-category-component
+      [tagCategory]="oneTagsCategory"
+    ></app-tags-category-component>
+  </div>
+</div>
+
+<div class="row">
+  <input [(ngModel)]="tagCategoryName" />
+  <button (click)="addAddNewCategory()">Dodaj kategorie</button>
+</div>

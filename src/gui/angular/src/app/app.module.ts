@@ -24,6 +24,9 @@ import {
 import { MatDialogModule } from "@angular/material/dialog";
 import {ProfilEditComponent} from "./profil-edit/profil-edit.component";
 import { UserAvatarComponent } from "./main-view/main-view/user-avatar/user-avatar.component";
+import { TagsConfigurationComponent } from "./admin/tags-configuration/tags-configuration.component";
+import { TagComponentComponent } from "./admin/tags-configuration/tags-category-component/tag-component/tag-component.component";
+import { TagsCategoryComponentComponent } from "./admin/tags-configuration/tags-category-component/tags-category-component.component";
 
 @NgModule({
   imports: [
@@ -52,7 +55,10 @@ import { UserAvatarComponent } from "./main-view/main-view/user-avatar/user-avat
     UserImagesComponent,
     UserAvatarComponent,
     ImageComponent,
-    ProfilEditComponent
+    ProfilEditComponent,
+    TagsConfigurationComponent,
+    TagsCategoryComponentComponent,
+    TagComponentComponent
   ],
   bootstrap: [AppComponent],
   providers: [

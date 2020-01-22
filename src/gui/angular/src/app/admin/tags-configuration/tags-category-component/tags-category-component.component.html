@@ -1,0 +1,16 @@
+<div class="row">
+  <span *ngIf="!editMode" >{{ tagCategory.name }}</span>
+  <span *ngIf="editMode" ><input [(ngModel)]="newName"/></span>
+<i *ngIf="!editMode" class="material-icons md-18 clickable" (click)="enableEdit()">edit</i>
+
+<i *ngIf="editMode" class="material-icons md-18 clickable" (click)="edit()">check</i>
+<i *ngIf="editMode" class="material-icons md-18 clickable" (click)="disableEdit()">cancel</i>
+</div>
+
+<div class="row" *ngFor="let oneTag of tagCategory.tags">
+  <app-tag-component [tag]="oneTag"></app-tag-component>
+</div>
+<div class="row">
+    <input [(ngModel)]="newTagName" />
+    <button (click)="addAddNewTag()">Dodaj tag</button>
+</div>

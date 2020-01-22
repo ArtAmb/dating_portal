@@ -19,25 +19,25 @@ export class AuthenticationService {
   constructor(
     private notifyService: NotificationService,
     private http: HttpClient,
-    private router : Router
+    private router : Router,
+    private loginServiceService: LoginServiceService
   ) {}
 
   ENV = environment;
   private _behaviorSubject = new BehaviorSubject(null);
 
   private AUTH_KEY = "funny_authentication";
+  private LOGGED_USER_KEY = "logged_user";
 
   public login(user: User) {
     this._login(user).subscribe(
       res => {
         this.notifyService.success("Zalogowano");
-        console.log(res);
-
-        const keys = res.headers.keys();
-        var headers = keys.map(key => `${key}: ${res.headers.get(key)}`);
-
-        console.log(keys);
-        console.log(headers);
+        this.loginServiceService.checkIfAuthorized().subscribe(authObj => {
+          console.log(authObj);
+          localStorage.setItem(this.LOGGED_USER_KEY, JSON.stringify(authObj));
+        },
+        err => this.notifyService.failure(err));
 
         localStorage.setItem(this.AUTH_KEY, "true");
         this._behaviorSubject.next("LOGIN");
@@ -69,6 +69,11 @@ export class AuthenticationService {
 
   public isAuthenticated() {
     return localStorage.getItem(this.AUTH_KEY) == "true";
+  }
+
+  public isAdmin() {
+    let loggedUser = JSON.parse(localStorage.getItem(this.LOGGED_USER_KEY));
+    return loggedUser.authorities.map(x => x.authority).includes("ROLE_ADMIN");
   }
 
   private _login(user: User): Observable<HttpResponse<any>> {

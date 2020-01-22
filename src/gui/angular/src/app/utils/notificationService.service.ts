@@ -1,13 +1,11 @@
-import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Injectable } from "@angular/core";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class NotificationService {
-
-constructor(private toastr: ToastrService) { }
-
+  constructor(private toastr: ToastrService) {}
 
   public success(msg = null) {
     if (msg == null) {
@@ -17,18 +15,21 @@ constructor(private toastr: ToastrService) { }
     }
   }
 
-
   public failure(err = null) {
     console.log(err);
     var msg = null;
-    if(err && err.error && err && err.error.message)
-      msg = err.error.message;
-     
+    if (err && err.error && err && err.error.message) msg = err.error.message;
+
     if (msg == null) {
       this.toastr.error("Nikt nie spodziewał się hiszpańskiej inkwizycji");
     } else {
-      this.toastr.error("Nikt nie spodziewał się hiszpańskiej inkwizycji: " + msg);
+      this.toastr.error(
+        "Nikt nie spodziewał się hiszpańskiej inkwizycji: " + msg
+      );
     }
-    
+  }
+
+  public showMessage(message: string) {
+    this.toastr.info(message);
   }
 }

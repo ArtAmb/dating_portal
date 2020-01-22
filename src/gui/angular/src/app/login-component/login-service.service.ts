@@ -24,10 +24,7 @@ export class LoginServiceService {
     return this.http.get(this.ENV.server_url + "/test/magic");
   }
 
-  checkIfAuthorized() {
-    var myHeader = new HttpHeaders();
-    myHeader.append("SET-COOKIE", "JSESSIONID=<jsessionid>");
-
+  checkIfAuthorized(): Observable<any> {
     return this.http.get(this.ENV.server_url + "/am/i/authorized");
   }
 }
