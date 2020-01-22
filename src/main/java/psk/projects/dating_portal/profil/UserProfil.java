@@ -1,11 +1,16 @@
 package psk.projects.dating_portal.profil;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
+
+
 
 @Data
 @Entity
@@ -24,4 +29,11 @@ public class UserProfil {
     private Long avatarImageId;
     private String description;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date birthDate;
+
+
+    private GENDER gender;
+
 }
+
