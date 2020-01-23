@@ -11,6 +11,11 @@ export class Profil{
     description : Text;
     birthDate : Date;
     gender : GENDER;
+    height : Number;
+    weight : Number;
+    eyeColor : EYE_COLOR;
+    hairColor : HAIR_COLOR;
+    region : REGION;
 
 }
 
@@ -18,6 +23,42 @@ export enum GENDER {
     Male = 1,
     Female = 2,
     None = 3
+}
+
+export enum EYE_COLOR {
+    Blue=0,
+    Brown=1,
+    Green=2,
+    Hazel=3,
+    Gray=4,
+    Other=5
+}
+
+export enum HAIR_COLOR {
+    Brown=0,
+    Blonde=1,
+    Black=2,
+    Red=3,
+    Other=4
+}
+
+export enum REGION {
+    Dolnoslaskie,
+    Kujawsko_pomorskie,
+    Lubelskie,
+    Lubuskie,
+    Lodzkie,
+    Malopolskie,
+    Mazowieckie,
+    Opolskie,
+    Podkarpackie,
+    Podlaskie,
+    Pomorskie,
+    Slaskie,
+    Swietokrzyskie,
+    Warminsko_mazurskie,
+    Wielkopolskie,
+    Zachodniopomorskie
 }
 
 @Component({

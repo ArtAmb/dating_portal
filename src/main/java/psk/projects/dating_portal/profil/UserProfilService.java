@@ -38,6 +38,11 @@ public class UserProfilService {
         profil.setDescription(updatedUserProfil.getDescription());
         profil.setBirthDate(updatedUserProfil.getBirthDate());
         profil.setGender(updatedUserProfil.getGender());
+        profil.setHeight(updatedUserProfil.getHeight());
+        profil.setWeight(updatedUserProfil.getWeight());
+        profil.setEyeColor(updatedUserProfil.getEyeColor());
+        profil.setHairColor(updatedUserProfil.getHairColor());
+        profil.setRegion(updatedUserProfil.getRegion());
 
         userProfilRepository.save(profil);
     }

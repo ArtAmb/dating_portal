@@ -8,19 +8,35 @@
         Tutaj możesz edytować swój profil.
     </p>
 
+    <div class="row label">
+        Wyświetlana nazwa profilu
+    </div>
 
     <div class="row">
+
         <input  [(ngModel)]="profil.displayLogin" placeholder="Nazwa" />
     </div>
 
+    <div class="row label">
+        Twój opis
+    </div>
 
     <div class="row">
-        <input  [(ngModel)]="profil.description" placeholder="Opis" />
+        <input  [(ngModel)]="profil.description" placeholder="..." />
+    </div>
+
+    <div class="row label">
+        Data urodzenia
     </div>
 
     <div class="row">
         <input type="date"  [(ngModel)]="profil.birthDate" />
     </div>
+
+    <div class="row label">
+        Płeć
+    </div>
+
     <div class="row">
         <select name="" id="" [(ngModel)]="profil.gender" >
             <option value="Female">Kobieta</option>
@@ -29,8 +45,89 @@
         </select>
     </div>
 
+    <div class="row label">
+        Wzrost
+    </div>
 
+    <div class="row">
+        <input type="range" min="150" max="220" [(ngModel)]="profil.height" placeholder="(cm)" class="slider" id="myRange"/>
+
+    </div>
+
+    <div class="row">
+        {{profil.height}}cm
+    </div>
+
+    <div class="row">
+        Waga
+    </div>
+
+    <div class="row">
+        <input type="range" min="40" max="220" [(ngModel)]="profil.weight" placeholder="(cm)" class="slider" id="myRange"/>
+
+    </div>
+
+    <div class="row">
+        {{profil.weight}}kg
+    </div>
+
+    <div class="row label" style="">
+        Waga
+    </div>
+
+    <div class="row">
+        <select name="" [(ngModel)]="profil.eyeColor" >
+            <option value="Blue">Niebieskie</option>
+            <option value="Brown">Brązowe</option>
+            <option value="Green">Zielone</option>
+            <option value="Hazel">Piwne</option>
+            <option value="Gray">Szare</option>
+            <option value="Other">Inne</option>
+        </select>
+    </div>
+
+    <div class="row label">
+        Kolor włosów
+    </div>
+
+    <div class="row">
+        <select name="" [(ngModel)]="profil.hairColor" >
+            <option value="Brown">Brązowe</option>
+            <option value="Blonde">Brązowe</option>
+            <option value="Black">Czarne</option>
+            <option value="Red">Rudy</option>
+            <option value="Other">Inne</option>
+        </select>
+    </div>
+
+    <div class="row label">
+        Województwo
+    </div>
+
+    <div class="row">
+        <select name="" [(ngModel)]="profil.region" >
+            <option value="Dolnoslaskie">dolnośląskie</option>
+            <option value="Kujawsko_pomorskie">Kujawsko-pomorskie</option>
+            <option value="Lubelskie">lubelskie</option>
+            <option value="Lubuskie">lubuskie</option>
+            <option value="Malopolskie">małopolskie</option>
+            <option value="Mazowieckie">mzowieckie</option>
+            <option value="Opolskie">opolskie</option>
+            <option value="Podkarpackie">podkarpackie</option>
+            <option value="Podlaskie">podlaskie</option>
+            <option value="Pomorskie">pomorskie</option>
+            <option value="Slaskie">śląskie</option>
+            <option value="Swietokrzyskie">Swietokrzyskie</option>
+            <option value="Warminsko_mazurskie">warmińsko-mazurskie</option>
+            <option value="Wielkopolskie">wielkopolskie</option>
+            <option value="Zachodniopomorskie">zachodniopomorskie</option>
+        </select>
+    </div>
+
+    <div class="row">
         <button (click)="save()">Aktualizuj</button>
+    </div>
+
 
 
 

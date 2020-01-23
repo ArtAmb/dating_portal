@@ -32,6 +32,15 @@ public class UserProfil {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
+    private Integer height;
+
+    private Integer weight;
+
+    private EYE_COLOR eyeColor;
+
+    private HAIR_COLOR hairColor;
+
+    private REGION region;
 
     private GENDER gender;
 
