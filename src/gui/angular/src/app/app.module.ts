@@ -27,6 +27,7 @@ import { UserAvatarComponent } from "./main-view/main-view/user-avatar/user-avat
 import { TagsConfigurationComponent } from "./admin/tags-configuration/tags-configuration.component";
 import { TagComponentComponent } from "./admin/tags-configuration/tags-category-component/tag-component/tag-component.component";
 import { TagsCategoryComponentComponent } from "./admin/tags-configuration/tags-category-component/tags-category-component.component";
+import {ProfilViewComponent} from "./profil-view/profil-view.component";
 
 @NgModule({
   imports: [
@@ -58,7 +59,8 @@ import { TagsCategoryComponentComponent } from "./admin/tags-configuration/tags-
     ProfilEditComponent,
     TagsConfigurationComponent,
     TagsCategoryComponentComponent,
-    TagComponentComponent
+    TagComponentComponent,
+    ProfilViewComponent
   ],
   bootstrap: [AppComponent],
   providers: [

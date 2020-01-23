@@ -22,7 +22,7 @@
     </div>
 
     <div class="row">
-        <input  [(ngModel)]="profil.description" placeholder="..." />
+        <textarea rows="5" cols="33" resz>{{profil.description}}</textarea>
     </div>
 
     <div class="row label">
@@ -58,7 +58,7 @@
         {{profil.height}}cm
     </div>
 
-    <div class="row">
+    <div class="row label">
         Waga
     </div>
 
@@ -72,7 +72,7 @@
     </div>
 
     <div class="row label" style="">
-        Waga
+        Kolor oczu
     </div>
 
     <div class="row">
@@ -92,11 +92,11 @@
 
     <div class="row">
         <select name="" [(ngModel)]="profil.hairColor" >
-            <option value="Brown">Brązowe</option>
-            <option value="Blonde">Brązowe</option>
-            <option value="Black">Czarne</option>
+            <option value="Brown">Brązowy</option>
+            <option value="Blonde">Blond</option>
+            <option value="Black">Czarny</option>
             <option value="Red">Rudy</option>
-            <option value="Other">Inne</option>
+            <option value="Other">Inny</option>
         </select>
     </div>
 

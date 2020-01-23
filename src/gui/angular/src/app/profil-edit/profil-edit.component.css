@@ -6,7 +6,9 @@
     font-weight: bold;
 }
 
-
+textarea{
+    resize: none;
+}
 .slider {
     -webkit-appearance: none;
     width: 20%;
