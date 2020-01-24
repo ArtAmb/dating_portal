@@ -34,8 +34,7 @@ public class UserProfilService {
         return user;
     }
 
-    public Collection<UserProfil> getAllProfils()
-    {
+    public Collection<UserProfil> getAllProfils() {
         Collection<UserProfil> collection = new ArrayList<UserProfil>();
 
         userProfilRepository.findAll().iterator().forEachRemaining(collection::add);
@@ -77,6 +76,12 @@ public class UserProfilService {
                 .imageId(imageId)
                 .description("")
                 .build();
+    }
+
+    public UserProfil findProfil(Principal principal) {
+        long userId = userRepository.findByLogin(principal.getName()).getId();
+        UserProfil profil = userProfilRepository.findByUserId(userId);
+        return profil;
     }
 
     public UserProfil findProfil(Long userId) {

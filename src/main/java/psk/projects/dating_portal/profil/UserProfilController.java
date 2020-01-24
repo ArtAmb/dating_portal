@@ -22,6 +22,11 @@ public class UserProfilController {
     public void updateProfil(@RequestBody UserProfil userProfil){ userProfilService.updateUserProfil(userProfil);}
 
 
+    @GetMapping("/user/profil")
+    public UserProfil findLoggedUserProfil(Principal principal) {
+        return userProfilService.findProfil(principal);
+    }
+
     @GetMapping("/user/profil-view")
     public UserProfil findUserProfil(@RequestParam("userId") String userId) {
         return userProfilService.findProfil(Long.parseLong(userId));
