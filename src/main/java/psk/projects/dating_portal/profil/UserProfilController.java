@@ -1,12 +1,11 @@
 package psk.projects.dating_portal.profil;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Collection;
 
 @RestController
 @AllArgsConstructor
@@ -23,8 +22,12 @@ public class UserProfilController {
     public void updateProfil(@RequestBody UserProfil userProfil){ userProfilService.updateUserProfil(userProfil);}
 
 
-    @GetMapping("/user/profil")
-    public UserProfil findUserProfil(Principal principal) {
-        return userProfilService.findProfil(principal);
+    @GetMapping("/user/profil-view")
+    public UserProfil findUserProfil(@RequestParam("userId") String userId) {
+        return userProfilService.findProfil(Long.parseLong(userId));
     }
+
+    @GetMapping("/user/profil-all")
+    public Collection<UserProfil> findAllProfils(){return userProfilService.getAllProfils();}
+
 }

@@ -17,7 +17,7 @@ import java.util.List;
 public class GalleryService {
     private final GalleryRepository galleryRepository;
     private final UserRepository userRepository;
-    private final UserProfilRepo userProfilRepo;
+    private final UserProfilRepository userProfilRepo;
     private final ImageRepository imageRepository;
     private final ImageInfoRepository imageInfoRepository;
 

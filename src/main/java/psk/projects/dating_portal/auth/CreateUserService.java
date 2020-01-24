@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import psk.projects.dating_portal.profil.GENDER;
 import psk.projects.dating_portal.profil.UserProfil;
-import psk.projects.dating_portal.profil.UserProfilRepo;
+import psk.projects.dating_portal.profil.UserProfilRepository;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 @Service
 @RequiredArgsConstructor
 public class CreateUserService {
-    private final UserProfilRepo userProfilRepo;
+    private final UserProfilRepository userProfilRepo;
     private final UserRepository userRepository;
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 

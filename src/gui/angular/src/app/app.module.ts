@@ -28,6 +28,7 @@ import { TagsConfigurationComponent } from "./admin/tags-configuration/tags-conf
 import { TagComponentComponent } from "./admin/tags-configuration/tags-category-component/tag-component/tag-component.component";
 import { TagsCategoryComponentComponent } from "./admin/tags-configuration/tags-category-component/tags-category-component.component";
 import {ProfilViewComponent} from "./profil-view/profil-view.component";
+import {FriendsViewComponent} from "./main-view/main-view/friends-view/friends-view.component";
 
 @NgModule({
   imports: [
@@ -60,7 +61,8 @@ import {ProfilViewComponent} from "./profil-view/profil-view.component";
     TagsConfigurationComponent,
     TagsCategoryComponentComponent,
     TagComponentComponent,
-    ProfilViewComponent
+    ProfilViewComponent,
+    FriendsViewComponent
   ],
   bootstrap: [AppComponent],
   providers: [

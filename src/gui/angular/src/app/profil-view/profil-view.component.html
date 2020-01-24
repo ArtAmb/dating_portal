@@ -4,6 +4,59 @@
 
 <div *ngIf="isAuthenticated()">
 
-    profil view ok!
+    <div class="row label">
+        Nazwa profilu
+    </div>
+    <div class="row">
+        {{profil.displayLogin}}
+    </div>
+    <div class="row label">
+        Opis
+    </div>
+    <div class="row">
+        {{profil.description}}
+    </div>
+    <div class="row label">
+        Data urodzenia
+    </div>
+    <div class="row">
+        {{profil.birthDate}}
+    </div>
+    <div class="row label">
+        Płeć
+    </div>
+    <div class="row">
+        {{_convertGender(profil.gender)}}
+    </div>
+    <div class="row label">
+        Wzrost
+    </div>
+    <div class="row">
+        {{profil.height}}cm
+    </div>
+    <div class="row label">
+        Waga
+    </div>
+    <div class="row">
+        {{profil.weight}}kg
+    </div>
+    <div class="row label" style="">
+        Kolor oczu
+    </div>
+    <div class="row">
+        {{_convertEyeColor(profil.eyeColor)}}
+    </div>
+    <div class="row label">
+        Kolor włosów
+    </div>
+    <div class="row">
+        {{_convertHairColor(profil.hairColor)}}
+    </div>
+    <div class="row label">
+        Województwo
+    </div>
+    <div class="row">
+        {{_convertRegion(profil.region)}}
+    </div>
 
 </div>
