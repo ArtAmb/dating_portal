@@ -10,6 +10,7 @@ import psk.projects.dating_portal.profil.UserProfilRepo;
 import psk.projects.dating_portal.tags.PartnerSearchAlgorithm;
 import psk.projects.dating_portal.tags.UserSearchInfo;
 import psk.projects.dating_portal.tags.UserSearchInfoRepository;
+import psk.projects.dating_portal.profil.UserProfilRepository;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
@@ -21,7 +22,7 @@ import java.util.stream.Stream;
 @Service
 @RequiredArgsConstructor
 public class CreateUserService {
-    private final UserProfilRepo userProfilRepo;
+    private final UserProfilRepository userProfilRepo;
     private final UserRepository userRepository;
     private final UserSearchInfoRepository userSearchInfoRepository;
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

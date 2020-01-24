@@ -30,6 +30,7 @@ import { TagsCategoryComponentComponent } from "./admin/tags-configuration/tags-
 import { UserTagsComponent } from "./main-view/main-view/user-tags/user-tags.component";
 import { UserTagComponent } from "./main-view/main-view/user-tags/user-tag/user-tag.component";
 import {ProfilViewComponent} from "./profil-view/profil-view.component";
+import {FriendsViewComponent} from "./main-view/main-view/friends-view/friends-view.component";
 import { MatchingButtonComponent } from "./main-view/main-view/matching/matching-button/matching-button.component";
 import { MatchingResultComponent } from "./main-view/main-view/matching/matching-result/matching-result.component";
 
@@ -63,12 +64,13 @@ import { MatchingResultComponent } from "./main-view/main-view/matching/matching
     ImageComponent,
     ProfilEditComponent,
     UserTagsComponent,
-    MatchingButtonComponent, 
+    MatchingButtonComponent,
     MatchingResultComponent,
     TagsConfigurationComponent,
     TagsCategoryComponentComponent,
     TagComponentComponent,
-    ProfilViewComponent
+    ProfilViewComponent,
+    FriendsViewComponent
   ],
   bootstrap: [AppComponent],
   providers: [

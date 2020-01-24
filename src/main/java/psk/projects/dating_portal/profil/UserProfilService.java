@@ -10,12 +10,14 @@ import psk.projects.dating_portal.auth.UserRepository;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Service
 @AllArgsConstructor
 public class UserProfilService {
     private final UserRepository userRepository;
-    private final UserProfilRepo userProfilRepository;
+    private final UserProfilRepository userProfilRepository;
     private final ImageRepository imageRepository;
 
     public UserProfil findByUser(String userLogin) {
@@ -30,6 +32,16 @@ public class UserProfilService {
         if (user == null)
             throw new IllegalStateException("User not found for login " + userLogin);
         return user;
+    }
+
+    public Collection<UserProfil> getAllProfils()
+    {
+        Collection<UserProfil> collection = new ArrayList<UserProfil>();
+
+        userProfilRepository.findAll().iterator().forEachRemaining(collection::add);
+
+        return collection;
+
     }
 
     public void updateUserProfil(UserProfil updatedUserProfil) {
@@ -67,8 +79,8 @@ public class UserProfilService {
                 .build();
     }
 
-    public UserProfil findProfil(Principal principal) {
-        long userId = findUserByLogin(principal.getName()).getId();
+    public UserProfil findProfil(Long userId) {
+
         UserProfil profil = userProfilRepository.findByUserId(userId);
 
         return profil;

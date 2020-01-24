@@ -16,6 +16,7 @@ export class Profil{
     eyeColor : EYE_COLOR;
     hairColor : HAIR_COLOR;
     region : REGION;
+    userId : Number;
 
 }
 
@@ -62,7 +63,7 @@ export enum REGION {
 }
 
 @Component({
-    selector: "app-main-view",
+    selector: "app-edit-view",
     templateUrl: "./profil-edit.component.html",
     styleUrls: ["./profil-edit.component.css"]
 })
