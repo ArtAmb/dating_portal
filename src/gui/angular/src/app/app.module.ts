@@ -27,7 +27,11 @@ import { UserAvatarComponent } from "./main-view/main-view/user-avatar/user-avat
 import { TagsConfigurationComponent } from "./admin/tags-configuration/tags-configuration.component";
 import { TagComponentComponent } from "./admin/tags-configuration/tags-category-component/tag-component/tag-component.component";
 import { TagsCategoryComponentComponent } from "./admin/tags-configuration/tags-category-component/tags-category-component.component";
+import { UserTagsComponent } from "./main-view/main-view/user-tags/user-tags.component";
+import { UserTagComponent } from "./main-view/main-view/user-tags/user-tag/user-tag.component";
 import {ProfilViewComponent} from "./profil-view/profil-view.component";
+import { MatchingButtonComponent } from "./main-view/main-view/matching/matching-button/matching-button.component";
+import { MatchingResultComponent } from "./main-view/main-view/matching/matching-result/matching-result.component";
 
 @NgModule({
   imports: [
@@ -55,8 +59,12 @@ import {ProfilViewComponent} from "./profil-view/profil-view.component";
     ImageDialogComponent,
     UserImagesComponent,
     UserAvatarComponent,
+    UserTagComponent,
     ImageComponent,
     ProfilEditComponent,
+    UserTagsComponent,
+    MatchingButtonComponent, 
+    MatchingResultComponent,
     TagsConfigurationComponent,
     TagsCategoryComponentComponent,
     TagComponentComponent,

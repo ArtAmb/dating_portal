@@ -32,4 +32,8 @@ export class NotificationService {
   public showMessage(message: string) {
     this.toastr.info(message);
   }
+
+  public showErrorMessage(errMsg: string) {
+    this.toastr.error(errMsg);
+  }
 }

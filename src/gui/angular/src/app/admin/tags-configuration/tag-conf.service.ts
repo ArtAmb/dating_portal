@@ -7,7 +7,6 @@ import { Observable } from "rxjs";
   providedIn: "root"
 })
 export class TagConfService {
-  
   constructor(private httpClient: HttpClient) {}
 
   public findAllTags(): Observable<Array<TagsCategory>> {
@@ -29,6 +28,15 @@ export class TagConfService {
   public addTag(arg0: { categoryId: number, name: string; }): Observable<Tag> {
     return this.httpClient.post<Tag>(environment.server_url + "/add-new-tag", arg0);
   }
+
+  updateUserTag(arg0: { tagId: number; checked: boolean; tagPriority: TagPriority }, context: TagType): Observable<UserTag> {
+    return this.httpClient.post<UserTag>(environment.server_url + "/update-user-tag/context/" + context, arg0);
+  }
+
+  findAllUserTags() {
+    return this.httpClient.get<Array<UserTag>>(environment.server_url + "/all-user-tags");
+  }
+  
 }
 
 export class TagsCategory {
@@ -42,4 +50,24 @@ export class Tag {
   id: number;
   name: string;
   archived: boolean;
+}
+
+export class UserTag {
+  tagId: number;
+  checked: boolean;
+  priority: TagPriority;
+  type: TagType;
+}
+
+export enum TagPriority {
+  LOVE,
+  LIKE,
+  NORMAL,
+  NOT_LIKE,
+  HATE
+}
+
+export enum TagType {
+  MY,
+  PARTNER
 }

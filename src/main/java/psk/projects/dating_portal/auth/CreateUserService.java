@@ -7,6 +7,9 @@ import org.springframework.util.Assert;
 import psk.projects.dating_portal.profil.GENDER;
 import psk.projects.dating_portal.profil.UserProfil;
 import psk.projects.dating_portal.profil.UserProfilRepo;
+import psk.projects.dating_portal.tags.PartnerSearchAlgorithm;
+import psk.projects.dating_portal.tags.UserSearchInfo;
+import psk.projects.dating_portal.tags.UserSearchInfoRepository;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
@@ -20,6 +23,7 @@ import java.util.stream.Stream;
 public class CreateUserService {
     private final UserProfilRepo userProfilRepo;
     private final UserRepository userRepository;
+    private final UserSearchInfoRepository userSearchInfoRepository;
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 
@@ -58,6 +62,12 @@ public class CreateUserService {
                 .build();
 
         userProfilRepo.save(userProfil);
+        UserSearchInfo searchConfig = UserSearchInfo.builder()
+                .userId(userId)
+                .algorithmType(PartnerSearchAlgorithm.LOOKING_FOR_MYSELF)
+                .tagsInfo("").build();
+
+        userSearchInfoRepository.save(searchConfig);
     }
 
 }

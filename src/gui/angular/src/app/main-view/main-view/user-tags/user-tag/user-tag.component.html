@@ -1,0 +1,11 @@
+<div class="row">
+  <span class="col">{{ tag.name }}</span>
+  <input class="col" [(ngModel)]="checked" type="checkbox" (change)="updateUserTag()" />
+  <select class="col" [(ngModel)]="tagPriority" (change)="updateUserTag()">
+    <option value="LOVE">Kocham</option>
+    <option value="LIKE">Lubie</option>
+    <option value="NORMAL">Akceptuje</option>
+    <option value="NOT_LIKE">Nie lubie</option>
+    <option value="HATE">Nienawidze</option>
+  </select>
+</div>

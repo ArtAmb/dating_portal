@@ -5,12 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import psk.projects.dating_portal.auth.UserRepository;
 
 import javax.transaction.Transactional;
+import java.security.Principal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,11 +33,25 @@ class TagCategoryDTO {
     String name;
 }
 
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+class UpdateUserTagDTO {
+    Long tagId;
+    boolean checked;
+    TagPriority tagPriority;
+}
+
 @RestController
 @AllArgsConstructor
 public class TagsController {
     private final TagCategoryRepository tagCategoryRepository;
     private final TagRepository tagRepository;
+    private final UserRepository userRepository;
+    private final UserTagRepository userTagRepository;
+    private final UserTagService userTagService;
+    private final UserSearchService userSearchService;
 
     @GetMapping("/all-tags")
     public List<TagCategory> findAllTags() {
@@ -85,4 +98,21 @@ public class TagsController {
         currTag.setName(tagDTO.getName());
         tagCategoryRepository.save(currTag);
     }
+
+    @GetMapping("/all-user-tags")
+    public List<UserTag> getAllUserTags(Principal principal) {
+        Long userId = userRepository.findByLogin(principal.getName()).getId();
+        return userTagRepository.findByUserId(userId);
+    }
+
+    @PostMapping("/update-user-tag/context/{context}")
+    public UserTag changeUserTags(@RequestBody UpdateUserTagDTO dto, @PathVariable TagType context, Principal principal) {
+        return userTagService.changeUserTags(dto, context, principal);
+    }
+
+    @GetMapping("/match-partner")
+    public List<PotentialPartner> matchPartners(Principal principal) {
+        return userSearchService.matchUsersForUser(principal);
+    }
+
 }

@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="col" *ngFor="let oneTagsCategory of allTagsCategory">
+    <div class="row">{{oneTagsCategory.name}}</div>
+    <div *ngFor="let oneTag of oneTagsCategory.tags">
+        <app-user-tag [tag]="oneTag" context="MYSELF"></app-user-tag>
+    </div>
+  </div>
+</div>

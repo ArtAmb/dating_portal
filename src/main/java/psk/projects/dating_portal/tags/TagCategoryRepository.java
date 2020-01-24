@@ -10,3 +10,13 @@ public interface TagCategoryRepository extends CrudRepository<TagCategory, Long>
 
 interface TagRepository extends CrudRepository<Tag, Long> {
 }
+
+interface UserTagRepository extends CrudRepository<UserTag, Long> {
+    UserTag findByTagIdAndUserIdAndType(Long tagId, Long userId, TagType type);
+
+    List<UserTag> findByUserIdAndType(Long userId, TagType type);
+
+    List<UserTag> findByUserId(Long userId);
+
+    List<UserTag> findByTagIdAndType(Long tagId, TagType type);
+}

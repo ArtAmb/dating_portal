@@ -2,6 +2,7 @@
   <h1>Portal randkowy</h1>
 </a>
 
-
+<app-matching-button *ngIf="isAuthenticated()" [context]="'SEARCH'"></app-matching-button>
+<app-matching-button *ngIf="isAuthenticated()" [context]="'DATE'"></app-matching-button>
 <h1 *ngIf="isAuthenticated()" (click)="logout()" >WYLOGUJ </h1>
 
