@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import psk.projects.dating_portal.profil.GENDER;
 import psk.projects.dating_portal.profil.UserProfil;
-import psk.projects.dating_portal.profil.UserProfilRepo;
 import psk.projects.dating_portal.tags.PartnerSearchAlgorithm;
 import psk.projects.dating_portal.tags.UserSearchInfo;
 import psk.projects.dating_portal.tags.UserSearchInfoRepository;
@@ -29,17 +28,17 @@ public class CreateUserService {
 
 
     @Transactional
-    public void createUser(AppUser user) {
-        createUser(user, Collections.singletonList(Roles.ROLE_NORMAL.toRole()));
+    public Long createUser(AppUser user) {
+        return createUser(user, Collections.singletonList(Roles.ROLE_NORMAL.toRole()));
     }
 
     @Transactional
-    public void createAdmin(AppUser user) {
+    public Long createAdmin(AppUser user) {
         List<Role> allRoles = Stream.of(Roles.values()).map(Roles::toRole).collect(Collectors.toList());
-        createUser(user, allRoles);
+        return createUser(user, allRoles);
     }
 
-    public void createUser(AppUser user, List<Role> roles) {
+    public Long createUser(AppUser user, List<Role> roles) {
         Assert.notNull(user.getLogin(), "login is required");
         Assert.notNull(user.getPassword(), "password is required");
         Assert.notNull(user.getEmail(), "email is required");
@@ -69,6 +68,7 @@ public class CreateUserService {
                 .tagsInfo("").build();
 
         userSearchInfoRepository.save(searchConfig);
+        return userId;
     }
 
 }

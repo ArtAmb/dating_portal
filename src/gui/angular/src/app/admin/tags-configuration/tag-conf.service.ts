@@ -53,6 +53,7 @@ export class Tag {
 }
 
 export class UserTag {
+  id: number;
   tagId: number;
   checked: boolean;
   priority: TagPriority;
@@ -60,14 +61,14 @@ export class UserTag {
 }
 
 export enum TagPriority {
-  LOVE,
-  LIKE,
-  NORMAL,
-  NOT_LIKE,
-  HATE
+  LOVE = "LOVE",
+  LIKE = "LIKE",
+  NORMAL = "NORMAL",
+  NOT_LIKE = "NOT_LIKE",
+  HATE = "HATE"
 }
 
 export enum TagType {
-  MY,
-  PARTNER
+  MY = "MY",
+  PARTNER = "PARTNER"
 }

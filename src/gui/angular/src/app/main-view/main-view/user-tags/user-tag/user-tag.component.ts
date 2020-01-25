@@ -27,8 +27,13 @@ export class UserTagComponent implements OnInit {
   tagPriority: TagPriority = TagPriority.NORMAL;
 
   ngOnInit() {
-    let userTag = this.userTagContainer.findMyTag(this.tag.id);
+    this._refresh();
+  }
+
+  private _refresh() {
+    let userTag = this.userTagContainer.findMyTag(this.tag.id, this._getContext());
     this.checked = userTag.checked;
+    this.tagPriority = userTag.priority;
   }
 
   updateUserTag() {
@@ -44,6 +49,7 @@ export class UserTagComponent implements OnInit {
       .subscribe(
         res => {
           this.userTagContainer.replaceUserTag(res);
+          this._refresh();
           this.notifyService.success();
         },
         err => this.notifyService.failure(err)

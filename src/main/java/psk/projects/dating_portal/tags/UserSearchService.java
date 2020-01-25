@@ -25,7 +25,7 @@ public class UserSearchService {
         List<UserTag> myPreferencesTag = findMyPartnerPrefeferences(userId, conf);
 
         List<PotentialPartner> potentialPartners = myPreferencesTag.stream()
-                .flatMap(tag -> userTagRepository.findByTagIdAndType(userId, TagType.MY).stream())
+                .flatMap(tag -> userTagRepository.findByTagIdAndTypeAndCheckedIsTrue(tag.getTagId(), TagType.MY).stream())
                 .collect(Collectors.groupingBy(UserTag::getUserId))
                 .entrySet().stream()
                 .map(es -> new PotentialPartner(es.getKey(), es.getValue()))

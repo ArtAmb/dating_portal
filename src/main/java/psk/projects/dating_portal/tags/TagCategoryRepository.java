@@ -19,4 +19,5 @@ interface UserTagRepository extends CrudRepository<UserTag, Long> {
     List<UserTag> findByUserId(Long userId);
 
     List<UserTag> findByTagIdAndType(Long tagId, TagType type);
+    List<UserTag> findByTagIdAndTypeAndCheckedIsTrue(Long tagId, TagType type);
 }

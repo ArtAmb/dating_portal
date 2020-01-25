@@ -23,6 +23,6 @@ public class TagCategory {
 
     boolean archived;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     List<Tag> tags;
 }
