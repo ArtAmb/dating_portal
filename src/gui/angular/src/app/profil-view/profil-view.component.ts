@@ -18,11 +18,12 @@ export class ProfilViewComponent implements OnInit {
         constructor(private authService: AuthenticationService,
                     private profilViewService: ProfilViewService,
                     private notificationService: NotificationService,
-                    private route : ActivatedRoute) {
+                    private route : ActivatedRoute,
+                    private profilEditService : ProfilEditService) {
         }
 
         profil: Profil = new Profil();
-        userId : Number;
+        userId : number;
 
     _convertGender(g :any) : any
     {
@@ -43,15 +44,34 @@ export class ProfilViewComponent implements OnInit {
 
         ngOnInit() {
 
-
-
+  /*      if(this.route.snapshot.queryParams['id']){
+*/
             this.route.params.subscribe(params => {
                 this.userId = +params['id'];
 
 
             });
 
-            this.profilViewService.findProfilByUserId(this.userId).subscribe(res=> {this.notificationService.success("Udalo sie zaladowac uzytkownika");this.profil = res;}, err=>{this.notificationService.failure("nie ma takiego uzytkownika");});
+            if(!isNaN(this.userId))
+            {
+                this.profilViewService.findProfilByUserId(this.userId).subscribe(res => {
+                    this.notificationService.success("Udalo sie zaladowac uzytkownika");
+                    this.profil = res;
+                }, err => {
+                    this.notificationService.failure("Nie ma takiego uzytkownika");
+                });
+            }
+            else {
+                this.profilEditService.findUserProfil().subscribe(res => {
+                    this.notificationService.success("Udalo sie zaladowac uzytkownika");
+                    this.profil = res;
+                }, err => {
+                    this.notificationService.failure("Nie ma takiego uzytkownika");
+                });
+
+            }
+
+
 
     }
 

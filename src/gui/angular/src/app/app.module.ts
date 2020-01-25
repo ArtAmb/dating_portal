@@ -33,6 +33,7 @@ import {ProfilViewComponent} from "./profil-view/profil-view.component";
 import {FriendsViewComponent} from "./main-view/main-view/friends-view/friends-view.component";
 import { MatchingButtonComponent } from "./main-view/main-view/matching/matching-button/matching-button.component";
 import { MatchingResultComponent } from "./main-view/main-view/matching/matching-result/matching-result.component";
+import {ProfilPicComponent} from "./main-view/main-view/profil-pic/profil-pic.component";
 
 @NgModule({
   imports: [
@@ -70,7 +71,8 @@ import { MatchingResultComponent } from "./main-view/main-view/matching/matching
     TagsCategoryComponentComponent,
     TagComponentComponent,
     ProfilViewComponent,
-    FriendsViewComponent
+    FriendsViewComponent,
+    ProfilPicComponent
   ],
   bootstrap: [AppComponent],
   providers: [
