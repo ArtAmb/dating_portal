@@ -72,8 +72,6 @@ export class LoginComponentComponent implements OnInit {
   checkIfAuthorized() {
     this.loginServiceService.checkIfAuthorized().subscribe(
       res => {
-        console.log(res);
-        console.log("WRYYYYYY");
         this.notificationService.success()
       },      
       err => this.notificationService.failure()

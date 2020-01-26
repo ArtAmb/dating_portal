@@ -28,7 +28,7 @@ export class ProfilViewComponent implements OnInit {
   ) {}
 
   profil: Profil = new Profil();
-  @Input() userId: number;
+  @Input() userId: Number;
 
   _convertGender(g: any): any {
     return ConvertGender(g);
@@ -44,40 +44,38 @@ export class ProfilViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.userId == null) {
+    if (this.userId) {
       this.route.params.subscribe(params => {
         this.userId = +params["id"];
         this._init();
       });
-    } else{
-        this._init();
+    } else {
+      this._init();
     }
-
-   
   }
 
   private _init() {
-    if (!isNaN(this.userId)) {
-        this.profilViewService.findProfilByUserId(this.userId).subscribe(
-          res => {
-            this.notificationService.success("Udalo sie zaladowac uzytkownika");
-            this.profil = res;
-          },
-          err => {
-            this.notificationService.failure("Nie ma takiego uzytkownika");
-          }
-        );
-      } else {
-        this.profilEditService.findUserProfil().subscribe(
-          res => {
-            this.notificationService.success("Udalo sie zaladowac uzytkownika");
-            this.profil = res;
-          },
-          err => {
-            this.notificationService.failure("Nie ma takiego uzytkownika");
-          }
-        );
-      }
+    if (this.userId) {
+      this.profilViewService.findProfilByUserId(this.userId).subscribe(
+        res => {
+          this.notificationService.success("Udalo sie zaladowac uzytkownika");
+          this.profil = res;
+        },
+        err => {
+          this.notificationService.failure("Nie ma takiego uzytkownika");
+        }
+      );
+    } else {
+      this.profilEditService.findUserProfil().subscribe(
+        res => {
+          this.notificationService.success("Udalo sie zaladowac uzytkownika");
+          this.profil = res;
+        },
+        err => {
+          this.notificationService.failure("Nie ma takiego uzytkownika");
+        }
+      );
+    }
   }
 
   isAuthenticated() {

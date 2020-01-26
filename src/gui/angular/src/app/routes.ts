@@ -4,6 +4,7 @@ import { ProfilEditComponent } from "./profil-edit/profil-edit.component";
 import { TagsConfigurationComponent } from "./admin/tags-configuration/tags-configuration.component";
 import { ProfilViewComponent } from "./profil-view/profil-view.component";
 import { MatchingResultComponent } from "./main-view/main-view/matching/matching-result/matching-result.component";
+import { AllUserChatsComponent } from "./chat/all-user-chats/all-user-chats.component";
 
 export const APP_ROUTES = [
   { path: "", component: MainViewComponent },
@@ -11,5 +12,6 @@ export const APP_ROUTES = [
   { path: "configuration", component: TagsConfigurationComponent },
   { path: "profil-view/:id", component: ProfilViewComponent },
   { path: "profil-view", component: ProfilViewComponent },
-  { path: "matching-result", component: MatchingResultComponent }
+  { path: "matching-result", component: MatchingResultComponent },
+  { path: "last-chats", component: AllUserChatsComponent}
 ];

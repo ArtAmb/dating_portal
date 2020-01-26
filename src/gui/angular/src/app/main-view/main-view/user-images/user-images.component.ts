@@ -35,6 +35,7 @@ export class UserImagesComponent implements OnInit {
   @Input() userId: Number;
 
   ngOnInit() {
+    console.log(this.userId);
     this._findUserGalleries().subscribe(
       res => {
         this.allGalleries = res;
@@ -45,10 +46,8 @@ export class UserImagesComponent implements OnInit {
 
   private _findUserGalleries(): Observable<any> {
     if (this.userId == null) {
-      console.log("DIO" + this.userId);
       return this.galleryService.findUserGalleries();
     } else {
-      console.log("WRYY" + this.userId);
       return this.galleryService.findUserGalleriesByUserId(this.userId.valueOf());
     }
   }

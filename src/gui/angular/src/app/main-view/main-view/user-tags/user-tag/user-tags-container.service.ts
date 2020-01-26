@@ -32,10 +32,6 @@ export class UserTagsContainerService {
 
   public findMyTag(tagId: number, context: TagType): UserTag {
     let tag = this.allUserTags.find(userTag => (userTag.tagId == tagId) && (userTag.type == context));
-    console.log(tagId);
-    console.log(context);
-    console.log(tag);
-    console.log(this.allUserTags);
 
     if(tag == null) {
       let newTag = new UserTag();
@@ -51,11 +47,7 @@ export class UserTagsContainerService {
   }
 
   replaceUserTag(userTag: UserTag) {
-    console.log("replaceUserTag");
-    console.log(userTag);
-    console.log(this.allUserTags);
     let tags = this.allUserTags.filter(tag => (tag.tagId != userTag.tagId) && (tag.type != userTag.type));
-    console.log(tags);
     tags.push(userTag);
     this.allUserTags = tags;
   }
