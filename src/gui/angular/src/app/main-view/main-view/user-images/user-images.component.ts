@@ -71,6 +71,9 @@ export class UserImagesComponent implements OnInit {
           this.notifyService.success();
           this.newGalleryModeEnable = false;
           this.galleryName = "";
+          if(!res.images) {
+            res.images=[];
+          }
           this.allGalleries.push(res);
         },
         err => this.notifyService.failure(err)
