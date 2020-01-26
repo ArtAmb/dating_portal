@@ -1,7 +1,10 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { GalleryService } from "./gallery.service";
 import { NotificationService } from "src/app/utils/notificationService.service";
-import { Gallery, GalleryAccessibility } from "../user-images/user-images.component";
+import {
+  Gallery,
+  GalleryAccessibility
+} from "../user-images/user-images.component";
 
 @Component({
   selector: "app-gallery",
@@ -15,7 +18,7 @@ export class GalleryComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
-
+  @Input() detailModeOn: boolean = false;
   galleryEditionEnable = false;
   newGalleryName = null;
   newGalleryAccessScope: GalleryAccessibility = null;

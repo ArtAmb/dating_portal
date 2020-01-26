@@ -33,5 +33,9 @@ export class GalleryService {
   public publishAvatarImage(dto: any): Observable<any>  {
     return this.httpClient.post(environment.server_url + "/upload-avatar-image", dto);
   }
+
+  public findUserGalleriesByUserId(userId: number): Observable<any> {
+    return this.httpClient.get(environment.server_url + "/galleries/for-user/" + userId);
+  }
   
 }

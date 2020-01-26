@@ -1,6 +1,9 @@
 package psk.projects.dating_portal.profil;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -53,8 +56,8 @@ public class GalleryController {
 
 
     @PostMapping("/user/galleries/add")
-    public void addGallery(@RequestBody AddGalleryDTO dto, Principal principal) {
-        galleryService.addNewGallery(dto, principal.getName());
+    public Gallery addGallery(@RequestBody AddGalleryDTO dto, Principal principal) {
+        return galleryService.addNewGallery(dto, principal.getName());
     }
 
     @PostMapping("gallery/update")
@@ -79,5 +82,10 @@ public class GalleryController {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+
+    @GetMapping("/galleries/for-user/{userId}")
+    public List<Gallery> findGalleries(@PathVariable Long userId) {
+        return galleryService.findAllByUser(userId);
     }
 }

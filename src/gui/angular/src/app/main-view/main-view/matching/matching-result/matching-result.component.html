@@ -1,5 +1,5 @@
-<p>
-  matching-result works!
-
-  {{getPartners()}}
-</p>
+<div>
+  <div class="row" *ngFor="let partner of getPartners()">
+    <app-potential-partner [potentialPartner] = "partner"></app-potential-partner>
+  </div>
+</div>

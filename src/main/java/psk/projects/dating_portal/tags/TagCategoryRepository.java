@@ -9,6 +9,7 @@ public interface TagCategoryRepository extends CrudRepository<TagCategory, Long>
 }
 
 interface TagRepository extends CrudRepository<Tag, Long> {
+    List<Tag> findAll();
 }
 
 interface UserTagRepository extends CrudRepository<UserTag, Long> {

@@ -18,6 +18,6 @@ export class MatchingResultComponent implements OnInit {
   }
 
   public getPartners() {
-    return JSON.stringify(this.matchedPartnerContainerService.potentialPartners);
+    return this.matchedPartnerContainerService.potentialPartners;
   }
 }

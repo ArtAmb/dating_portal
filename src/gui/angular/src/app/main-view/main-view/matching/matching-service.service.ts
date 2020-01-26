@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "./../../../../environments/environment";
-import { UserTag } from "src/app/admin/tags-configuration/tag-conf.service";
+import { UserTag, TagPriority } from "src/app/admin/tags-configuration/tag-conf.service";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -17,6 +17,15 @@ export class MatchingServiceService {
 
 export class PotentialPartner {
   userId: number;
-  userTags: Array<UserTag>;
+  imageAvatarId: number;
+  tags: Array<TagView>;
   matchingRate: number;
+
+  description: String;
+  login: string;
+}
+
+export class TagView {
+  name: string;
+  priority: TagPriority;
 }

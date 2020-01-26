@@ -3,13 +3,11 @@ package psk.projects.dating_portal.profil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import org.springframework.web.multipart.MultipartFile;
 import psk.projects.dating_portal.auth.AppUser;
 import psk.projects.dating_portal.auth.UserRepository;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -25,6 +23,10 @@ public class GalleryService {
         AppUser user = findUserByLogin(userLogin);
 
         return galleryRepository.findByUserId(user.getId());
+    }
+
+    public List<Gallery> findAllByUser(Long userId) {
+        return galleryRepository.findByUserId(userId);
     }
 
     private AppUser findUserByLogin(String userLogin) {
@@ -72,7 +74,7 @@ public class GalleryService {
 
     }
 
-    public void addNewGallery(AddGalleryDTO dto, String login) {
+    public Gallery addNewGallery(AddGalleryDTO dto, String login) {
         AppUser user = findUserByLogin(login);
 
         Gallery gallery = Gallery.builder()
@@ -81,7 +83,7 @@ public class GalleryService {
                 .accessScope(GalleryAccessibility.PUBLIC)
                 .build();
 
-        galleryRepository.save(gallery);
+        return galleryRepository.save(gallery);
     }
 
     public void updateGallery(UpdateGalleryDTO updateGalleryDTO) {

@@ -1,0 +1,31 @@
+.tag {
+    display: inline;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 3px
+}
+
+.love {
+    border-color: red;
+}
+
+.like {
+    border-color: darkgreen;
+}
+
+.normal {
+    border-color: olivedrab;
+}
+
+.notLike {
+    border-color: brown;
+    text-decoration: line-through;
+}
+
+.hate {
+    border-color: black;
+    text-decoration: line-through;
+}
+
+

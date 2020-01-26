@@ -111,7 +111,7 @@ public class TagsController {
     }
 
     @GetMapping("/match-partner")
-    public List<PotentialPartner> matchPartners(Principal principal) {
+    public List<PotentialPartnerView> matchPartners(Principal principal) {
         return userSearchService.matchUsersForUser(principal);
     }
 

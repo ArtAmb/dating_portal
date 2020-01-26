@@ -54,11 +54,11 @@ public class UserTagService {
 
     private UserSearchInfo findSearchInfByUserId(long userId) {
         Optional<UserSearchInfo> searchInfo = userSearchInfoRepository.findByUserId(userId);
+
         return searchInfo.orElseGet(() -> userSearchInfoRepository.save(UserSearchInfo.builder()
                 .algorithmType(PartnerSearchAlgorithm.LOOKING_FOR_MYSELF)
                 .userId(userId)
                 .tagsInfo("")
                 .build()));
-
     }
 }

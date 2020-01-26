@@ -34,6 +34,8 @@ import {FriendsViewComponent} from "./main-view/main-view/friends-view/friends-v
 import { MatchingButtonComponent } from "./main-view/main-view/matching/matching-button/matching-button.component";
 import { MatchingResultComponent } from "./main-view/main-view/matching/matching-result/matching-result.component";
 import {ProfilPicComponent} from "./main-view/main-view/profil-pic/profil-pic.component";
+import { PotentialPartnerComponent } from "./main-view/main-view/matching/matching-result/potential-partner/potential-partner.component";
+import { PotentialPartnerDialogComponent } from "./main-view/main-view/matching/matching-result/potential-partner/potential-partner-dialog/potential-partner-dialog.component";
 
 @NgModule({
   imports: [
@@ -58,11 +60,13 @@ import {ProfilPicComponent} from "./main-view/main-view/profil-pic/profil-pic.co
     RightBarComponent,
     MainViewComponent,
     GalleryComponent,
+    PotentialPartnerDialogComponent,
     ImageDialogComponent,
     UserImagesComponent,
     UserAvatarComponent,
     UserTagComponent,
     ImageComponent,
+    PotentialPartnerComponent,
     ProfilEditComponent,
     UserTagsComponent,
     MatchingButtonComponent,
@@ -82,7 +86,7 @@ import {ProfilPicComponent} from "./main-view/main-view/profil-pic/profil-pic.co
       multi: true
     }
   ],
-  entryComponents: [ImageComponent, ImageDialogComponent]
+  entryComponents: [ImageComponent, ImageDialogComponent, PotentialPartnerDialogComponent]
 })
 export class AppModule {}
 // RouterModule.forRoot([{ path: '', component: LoginComponentComponent }])

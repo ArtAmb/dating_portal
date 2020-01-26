@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { GalleryService } from "../gallery/gallery.service";
 import { NotificationService } from "src/app/utils/notificationService.service";
+import { Observable } from "rxjs";
 
 export class ImageInfo {
   imageId: number;
@@ -30,13 +31,26 @@ export class UserImagesComponent implements OnInit {
     private notifyService: NotificationService
   ) {}
 
+  @Input() detailModeOn = false;
+  @Input() userId: Number;
+
   ngOnInit() {
-    this.galleryService.findUserGalleries().subscribe(
+    this._findUserGalleries().subscribe(
       res => {
         this.allGalleries = res;
       },
       err => this.notifyService.failure(err)
     );
+  }
+
+  private _findUserGalleries(): Observable<any> {
+    if (this.userId == null) {
+      console.log("DIO" + this.userId);
+      return this.galleryService.findUserGalleries();
+    } else {
+      console.log("WRYY" + this.userId);
+      return this.galleryService.findUserGalleriesByUserId(this.userId.valueOf());
+    }
   }
 
   allGalleries: Gallery[] = [];
@@ -58,6 +72,7 @@ export class UserImagesComponent implements OnInit {
           this.notifyService.success();
           this.newGalleryModeEnable = false;
           this.galleryName = "";
+          this.allGalleries.push(res);
         },
         err => this.notifyService.failure(err)
       );

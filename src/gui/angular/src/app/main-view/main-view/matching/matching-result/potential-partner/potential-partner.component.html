@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 class="row">{{ potentialPartner.login }}</h4>
+      <div class="row">
+        <div class="col">
+          <app-image
+            *ngIf="avatarImage && avatarImage.imageId"
+            [image]="avatarImage"
+          ></app-image>
+        </div>
+        <div class="col">
+          <div class="row">{{ potentialPartner.description }}</div>
+          <div class="row">{{ potentialPartner.matchingRate }}</div>
+        </div>
+        <div class="col">
+          <button class="row" (click)="invite()">Zaproś</button>
+          <button class="row" (click)="sendMessage()">Napisz wiadomość</button>
+          <button class="row" (click)="showMore()">Więcej</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <span
+      [class]="chooseClass(oneTag)"
+      *ngFor="let oneTag of potentialPartner.tags"
+    >
+      {{ oneTag.name }}
+    </span>
+  </div>
+</div>

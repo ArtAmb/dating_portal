@@ -1,10 +1,10 @@
 <div class="row">
   <span class="row" *ngIf="!galleryEditionEnable">
     <h4 style="padding-right: 10px;">{{ gallery.title }}</h4>
-    <span>{{gallery.accessScope}}</span>
-    <i class="material-icons md-18 clickable" (click)="enableGalleryEdition()">edit</i>
+    <span *ngIf="!detailModeOn" >{{gallery.accessScope}}</span>
+    <i *ngIf="!detailModeOn" class="material-icons md-18 clickable" (click)="enableGalleryEdition()">edit</i>
   </span>
-  <span class="row" *ngIf="galleryEditionEnable">
+  <span class="row" *ngIf="!detailModeOn && galleryEditionEnable">
     <input [(ngModel)]="newGalleryName"/>
     <select [(ngModel)]="newGalleryAccessScope">
         <option value="PRIVATE">Prywatna</option>
@@ -20,7 +20,7 @@
   </span>
 </div>
 
-<div class="row">
+<div *ngIf="!detailModeOn" class="row">
   <input
     class="row"
     type="file"

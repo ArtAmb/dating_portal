@@ -1,13 +1,15 @@
 package psk.projects.dating_portal.tags;
 
 import lombok.AllArgsConstructor;
-import lombok.Value;
 import org.springframework.stereotype.Service;
 import psk.projects.dating_portal.auth.UserRepository;
+import psk.projects.dating_portal.profil.UserProfil;
+import psk.projects.dating_portal.profil.UserProfilRepository;
 
 import java.security.Principal;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -16,12 +18,14 @@ public class UserSearchService {
     private final UserRepository userRepository;
     private final UserTagRepository userTagRepository;
     private final UserSearchInfoRepository userSearchInfoRepository;
+    private final UserProfilRepository userProfilRepository;
+    private final TagRepository tagRepository;
 
 
-    public List<PotentialPartner> matchUsersForUser(Principal principal) {
+    public List<PotentialPartnerView> matchUsersForUser(Principal principal) {
         long userId = userRepository.findByLogin(principal.getName()).getId();
         UserSearchInfo conf = userSearchInfoRepository.findByUserId(userId).get();
-
+        Map<Long, Tag> tagConfByIdMap = this.findTagsConfMap();
         List<UserTag> myPreferencesTag = findMyPartnerPrefeferences(userId, conf);
 
         List<PotentialPartner> potentialPartners = myPreferencesTag.stream()
@@ -32,9 +36,30 @@ public class UserSearchService {
                 .collect(Collectors.toList());
 
         return potentialPartners.stream()
+                .filter(pp -> pp.getUserId() != userId)
                 .sorted(Comparator.comparingInt(PotentialPartner::getMatchingRate).reversed())
                 .limit(10)
+                .map(pp -> {
+                    UserProfil profil = userProfilRepository.findByUserId(pp.getUserId());
+
+                    return PotentialPartnerView.builder()
+                            .userId(pp.getUserId())
+                            .imageAvatarId(profil.getAvatarImageId())
+                            .description(profil.getDescription())
+                            .login(profil.getDisplayLogin())
+                            .tags(pp.getUserTags().stream().map(tag -> {
+                                return PartnerTag.builder()
+                                        .name(tagConfByIdMap.get(tag.getTagId()).getName())
+                                        .priority(tag.getPriority()).build();
+                            }).collect(Collectors.toList()))
+                            .matchingRate(pp.getMatchingRate())
+                            .build();
+                })
                 .collect(Collectors.toList());
+    }
+
+    private Map<Long, Tag> findTagsConfMap() {
+        return tagRepository.findAll().stream().collect(Collectors.toMap(Tag::getId, t -> t));
     }
 
     private List<UserTag> findMyPartnerPrefeferences(long userId, UserSearchInfo conf) {
