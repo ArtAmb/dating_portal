@@ -33,6 +33,7 @@ export class LoginComponentComponent implements OnInit {
 
   login() {
     this.authenticationService.login(this.user);
+    window.location.reload();
   }
 
   register() {
@@ -40,7 +41,8 @@ export class LoginComponentComponent implements OnInit {
     this.loginServiceService.register(this.user).subscribe(
       res => {
         this.notificationService.success("Zarejestrowano pomyślnie");
-        this.authenticationService.login(this.user);
+        //this.authenticationService.login(this.user);
+        this.login();
       },
       err => this.notificationService.failure(err)
     );

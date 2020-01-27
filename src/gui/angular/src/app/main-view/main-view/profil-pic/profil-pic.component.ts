@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from "@angular/core";
+import {Component, OnInit, Input, OnChanges} from "@angular/core";
 import { GalleryService } from "../gallery/gallery.service";
 import { NotificationService } from "../../../utils/notificationService.service";
 import { UserProfilService } from "../profil/user-profil.service";
 import { ImageInfo } from "../user-images/user-images.component";
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import { ProfilViewService } from "../../../profil-view/profil-view-service.component";
+import {AuthenticationService} from "../../../login-component/Authentication.service";
 
 @Component({
   selector: "app-profil-pic",
@@ -17,40 +18,52 @@ export class ProfilPicComponent implements OnInit {
     private notificationService: NotificationService,
     private userProfilService: UserProfilService,
     private profilViewService: ProfilViewService,
-    private route: ActivatedRoute
-  ) {}
+    private authService: AuthenticationService,
+    private router : Router
+  ) {
+      this.router.events.subscribe((val)=>{this.getPic();}) }
   public avatarImage: ImageInfo = null;
   @Input() userId: number;
 
-  ngOnInit() {
+  isAuthenticated() {
+    return this.authService.isAuthenticated();
+  }
+
+
+  ngOnInit(): void {
+    this.getPic();
+  }
+  getPic() : void
+  {
+
     if (this.userId) {
       this.profilViewService.findProfilByUserId(this.userId).subscribe(
-        res => {
-          this.notificationService.success("Udalo sie zaladowac uzytkownika");
-          if (res.avatarImageId) {
-            let tmp = new ImageInfo();
-            tmp.imageId = res.avatarImageId.valueOf();
+          res => {
+            this.notificationService.success("Udalo sie zaladowac uzytkownika");
+            if (res.avatarImageId) {
+              let tmp = new ImageInfo();
+              tmp.imageId = res.avatarImageId.valueOf();
 
-            this.avatarImage = tmp;
+              this.avatarImage = tmp;
+            }
+          },
+          err => {
+            this.notificationService.showErrorMessage(
+                "Nie ma takiego uzytkownika"
+            );
           }
-        },
-        err => {
-          this.notificationService.showErrorMessage(
-            "Nie ma takiego uzytkownika"
-          );
-        }
       );
     } else {
       this.userProfilService.findUserProfil().subscribe(
-        res => {
-          if (res.avatarImageId) {
-            let tmp = new ImageInfo();
-            tmp.imageId = res.avatarImageId.valueOf();
+          res => {
+            if (res.avatarImageId) {
+              let tmp = new ImageInfo();
+              tmp.imageId = res.avatarImageId.valueOf();
 
-            this.avatarImage = tmp;
-          }
-        },
-        err => this.notificationService.failure(err)
+              this.avatarImage = tmp;
+            }
+          },
+          err => this.notificationService.failure(err)
       );
     }
   }
