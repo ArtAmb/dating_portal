@@ -1,7 +1,4 @@
-<p>
-  right-bar works!
-</p>
-
-<app-profil-pic></app-profil-pic>
-
-<a [routerLink]="['/profil-view']">Mój profil</a>
+<div *ngIf="isAuth()">
+  <app-profil-pic></app-profil-pic>
+  <a [routerLink]="['/profil-view']">Mój profil</a>
+</div>

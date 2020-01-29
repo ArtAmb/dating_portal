@@ -37,6 +37,7 @@ import {ProfilPicComponent} from "./main-view/main-view/profil-pic/profil-pic.co
 import { PotentialPartnerComponent } from "./main-view/main-view/matching/matching-result/potential-partner/potential-partner.component";
 import { PotentialPartnerDialogComponent } from "./main-view/main-view/matching/matching-result/potential-partner/potential-partner-dialog/potential-partner-dialog.component";
 import { AllUserChatsComponent } from "./chat/all-user-chats/all-user-chats.component";
+import { ChatComponent } from "./chat/all-user-chats/chat/chat.component";
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import { AllUserChatsComponent } from "./chat/all-user-chats/all-user-chats.comp
     MainViewComponent,
     GalleryComponent,
     AllUserChatsComponent,
+    ChatComponent,
     PotentialPartnerDialogComponent,
     ImageDialogComponent,
     UserImagesComponent,

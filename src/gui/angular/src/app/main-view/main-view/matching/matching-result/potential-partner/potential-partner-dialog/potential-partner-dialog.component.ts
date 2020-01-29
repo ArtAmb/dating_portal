@@ -12,6 +12,7 @@ export class PotentialPartnerDialogComponent implements OnInit {
   
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.potentialPartner = data.potentialPartner;
+    console.log(this.potentialPartner);
   }
 
   ngOnInit() {}

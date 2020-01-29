@@ -73,6 +73,7 @@ export class ProfilEditComponent implements OnInit {
     profil : Profil = new Profil();
 
     ngOnInit() {
+        console.log("A4");
         this.profilEditService.findUserProfil().subscribe(res=>{this.profil= res});
 
     }

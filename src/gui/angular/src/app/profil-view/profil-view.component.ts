@@ -44,12 +44,18 @@ export class ProfilViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.userId) {
+    console.log(this.userId);
+    if (!this.userId) {
+      console.log("Wruu");
       this.route.params.subscribe(params => {
         this.userId = +params["id"];
+        if(!this.userId)
+          this.userId = null;
+
         this._init();
       });
     } else {
+      console.log("Wruu2");
       this._init();
     }
   }
@@ -66,6 +72,7 @@ export class ProfilViewComponent implements OnInit {
         }
       );
     } else {
+      console.log("A1");
       this.profilEditService.findUserProfil().subscribe(
         res => {
           this.notificationService.success("Udalo sie zaladowac uzytkownika");

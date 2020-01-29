@@ -1,11 +1,12 @@
-import {Component, OnInit, Input, OnChanges} from "@angular/core";
+import { Component, OnInit, Input, OnChanges } from "@angular/core";
 import { GalleryService } from "../gallery/gallery.service";
 import { NotificationService } from "../../../utils/notificationService.service";
 import { UserProfilService } from "../profil/user-profil.service";
 import { ImageInfo } from "../user-images/user-images.component";
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ProfilViewService } from "../../../profil-view/profil-view-service.component";
-import {AuthenticationService} from "../../../login-component/Authentication.service";
+import { AuthenticationService } from "../../../login-component/Authentication.service";
+import { EventBusService } from "src/app/utils/event-bus.service";
 
 @Component({
   selector: "app-profil-pic",
@@ -19,9 +20,14 @@ export class ProfilPicComponent implements OnInit {
     private userProfilService: UserProfilService,
     private profilViewService: ProfilViewService,
     private authService: AuthenticationService,
-    private router : Router
+    private eventBusService: EventBusService
   ) {
-      this.router.events.subscribe((val)=>{this.getPic();}) }
+    this.eventBusService.getSubscriber().subscribe(msg => {
+      if (msg == "PROFIL_IMAGE_REFRESH") {
+        this.refreshPicture();
+      }
+    });
+  }
   public avatarImage: ImageInfo = null;
   @Input() userId: number;
 
@@ -29,41 +35,40 @@ export class ProfilPicComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
 
-
   ngOnInit(): void {
-    this.getPic();
+    this.refreshPicture();
   }
-  getPic() : void
-  {
 
+  refreshPicture(): void {
     if (this.userId) {
       this.profilViewService.findProfilByUserId(this.userId).subscribe(
-          res => {
-            this.notificationService.success("Udalo sie zaladowac uzytkownika");
-            if (res.avatarImageId) {
-              let tmp = new ImageInfo();
-              tmp.imageId = res.avatarImageId.valueOf();
+        res => {
+          this.notificationService.success("Udalo sie zaladowac uzytkownika");
+          if (res.avatarImageId) {
+            let tmp = new ImageInfo();
+            tmp.imageId = res.avatarImageId.valueOf();
 
-              this.avatarImage = tmp;
-            }
-          },
-          err => {
-            this.notificationService.showErrorMessage(
-                "Nie ma takiego uzytkownika"
-            );
+            this.avatarImage = tmp;
           }
+        },
+        err => {
+          this.notificationService.showErrorMessage(
+            "Nie ma takiego uzytkownika"
+          );
+        }
       );
     } else {
+      console.log("A2");
       this.userProfilService.findUserProfil().subscribe(
-          res => {
-            if (res.avatarImageId) {
-              let tmp = new ImageInfo();
-              tmp.imageId = res.avatarImageId.valueOf();
+        res => {
+          if (res.avatarImageId) {
+            let tmp = new ImageInfo();
+            tmp.imageId = res.avatarImageId.valueOf();
 
-              this.avatarImage = tmp;
-            }
-          },
-          err => this.notificationService.failure(err)
+            this.avatarImage = tmp;
+          }
+        },
+        err => this.notificationService.failure(err)
       );
     }
   }

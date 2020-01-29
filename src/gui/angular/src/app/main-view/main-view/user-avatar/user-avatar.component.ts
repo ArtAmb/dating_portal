@@ -3,6 +3,7 @@ import { ImageInfo } from "../user-images/user-images.component";
 import { GalleryService } from "../gallery/gallery.service";
 import { NotificationService } from "src/app/utils/notificationService.service";
 import { UserProfilService } from "../profil/user-profil.service";
+import { EventBusService } from "src/app/utils/event-bus.service";
 
 @Component({
   selector: "app-user-avatar",
@@ -13,8 +14,10 @@ export class UserAvatarComponent implements OnInit {
   constructor(
     private galleryService: GalleryService,
     private notificationService: NotificationService,
-    private userProfilService: UserProfilService
+    private userProfilService: UserProfilService,
+    private eventBusService: EventBusService
   ) {
+    console.log("A3");
     this.userProfilService.findUserProfil().subscribe(
       res => {
         if (res.avatarImageId) {
@@ -57,6 +60,7 @@ export class UserAvatarComponent implements OnInit {
     this.galleryService.publishAvatarImage(uploadData).subscribe(
       res => {
         this.notificationService.success();
+        this.eventBusService.getSubscriber().next("PROFIL_IMAGE_REFRESH");
         this._reset();
         this.avatarImage = res;
       },

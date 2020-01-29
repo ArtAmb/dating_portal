@@ -33,7 +33,6 @@ export class LoginComponentComponent implements OnInit {
 
   login() {
     this.authenticationService.login(this.user);
-    window.location.reload();
   }
 
   register() {

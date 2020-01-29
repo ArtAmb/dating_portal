@@ -170,3 +170,46 @@ app-right-bar {
   padding-left: 12%;
   width: 82%;
 }
+
+.chat-window {
+  position: fixed;
+  bottom: 0px;
+  right: 11%;
+  z-index: 10;
+}
+.box {
+  display: inline-flex;
+  width: 300px;
+  height: 300px;
+  letter-spacing: -2px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(86, 184, 104);
+  font-size: 30px;
+  color: #bdbdbd;
+}
+.up p:hover {
+  color: #fff;
+  background-color: #1976d2;
+}
+
+.messages {
+  display: block;
+  height: 250px;
+  width: 290px;
+  margin-bottom: 20px;
+  background-color: #19d2c9 !important;
+}
+
+.msg-input {
+  display: block;
+  background-color: #1976d2 !important;
+  height: 20px;
+  width: 290px;
+  margin-top: 280px;
+  clear: both;
+}
+
+.msg-input input {
+  width: 300px;
+}
