@@ -19,12 +19,22 @@ public class GalleryService {
     private final ImageRepository imageRepository;
     private final ImageInfoRepository imageInfoRepository;
 
+    /**
+     * wyszukanie galerii uzytkownika po loginie
+     * @param userLogin
+     * @return
+     */
     public List<Gallery> findAllByUser(String userLogin) {
         AppUser user = findUserByLogin(userLogin);
 
         return galleryRepository.findByUserId(user.getId());
     }
 
+    /**
+     * wyszukanie galerii uzytkownika po jego id
+     * @param userId
+     * @return
+     */
     public List<Gallery> findAllByUser(Long userId) {
         return galleryRepository.findByUserId(userId);
     }
@@ -37,6 +47,12 @@ public class GalleryService {
         return user;
     }
 
+    /**
+     * zapisanie obrazka w bazie
+     * @param dto
+     * @return
+     * @throws IOException
+     */
     @Transactional
     public ImageInfo publishImage(UploadImageDTO dto) throws IOException {
         Assert.notNull(dto.getGalleryId(), "gallery id is required");
@@ -69,11 +85,22 @@ public class GalleryService {
         galleryRepository.save(gallery);
     }
 
+    /**
+     * wyszukanie obrazka po id
+     * @param imageId
+     * @return
+     */
     public Image findImage(Long imageId) {
         return imageRepository.findById(imageId).get();
 
     }
 
+    /**
+     * dodanei nowej galerii
+     * @param dto dane na podstawie ktorych zostanie dodana galeria
+     * @param login login wlasciciela galerii
+     * @return
+     */
     public Gallery addNewGallery(AddGalleryDTO dto, String login) {
         AppUser user = findUserByLogin(login);
 
@@ -86,6 +113,10 @@ public class GalleryService {
         return galleryRepository.save(gallery);
     }
 
+    /**
+     * zaktualizowanie danych w galerii
+     * @param updateGalleryDTO
+     */
     public void updateGallery(UpdateGalleryDTO updateGalleryDTO) {
         Assert.notNull(updateGalleryDTO, "updateGalleryDTO is req");
         Assert.notNull(updateGalleryDTO.getGalleryName(), "GalleryName is req");

@@ -19,6 +19,13 @@ public class UserTagService {
     private final UserTagRepository userTagRepository;
     private final UserSearchInfoRepository userSearchInfoRepository;
 
+    /**
+     * metoda do aktualizacji tagow
+     * @param dto
+     * @param context
+     * @param principal
+     * @return
+     */
     @Transactional
     public UserTag changeUserTags(@RequestBody UpdateUserTagDTO dto, @PathVariable TagType context, Principal principal) {
         long userId = userRepository.findByLogin(principal.getName()).getId();

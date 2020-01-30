@@ -20,6 +20,11 @@ public class UserProfilService {
     private final UserProfilRepository userProfilRepository;
     private final ImageRepository imageRepository;
 
+    /**
+     * wyszukanie prodilu uzytkownika po loginie
+     * @param userLogin
+     * @return
+     */
     public UserProfil findByUser(String userLogin) {
         AppUser user = findUserByLogin(userLogin);
 
@@ -34,6 +39,10 @@ public class UserProfilService {
         return user;
     }
 
+    /**
+     * pobranie wszystkich profili
+     * @return
+     */
     public Collection<UserProfil> getAllProfils() {
         Collection<UserProfil> collection = new ArrayList<UserProfil>();
 
@@ -43,6 +52,10 @@ public class UserProfilService {
 
     }
 
+    /**
+     * aktualizacja danych profilu
+     * @param updatedUserProfil
+     */
     public void updateUserProfil(UserProfil updatedUserProfil) {
         UserProfil profil = userProfilRepository.findByUserId(updatedUserProfil.getUserId());
         profil.setDisplayLogin(updatedUserProfil.getDisplayLogin());
@@ -58,6 +71,13 @@ public class UserProfilService {
         userProfilRepository.save(profil);
     }
 
+    /**
+     * dodanie zdjecia profilowego
+     * @param file
+     * @param principal
+     * @return
+     * @throws IOException
+     */
     @Transactional
     public ImageInfo publishAvatar(MultipartFile file, Principal principal) throws IOException {
         Image image = Image.builder()
@@ -78,12 +98,22 @@ public class UserProfilService {
                 .build();
     }
 
+    /**
+     * wyszukanie profilu zalogowane uzytkownika
+     * @param principal
+     * @return
+     */
     public UserProfil findProfil(Principal principal) {
         long userId = userRepository.findByLogin(principal.getName()).getId();
         UserProfil profil = userProfilRepository.findByUserId(userId);
         return profil;
     }
 
+    /**
+     * wyszukanie profilu po id
+     * @param userId
+     * @return
+     */
     public UserProfil findProfil(Long userId) {
 
         UserProfil profil = userProfilRepository.findByUserId(userId);

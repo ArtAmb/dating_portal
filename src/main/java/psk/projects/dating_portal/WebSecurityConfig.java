@@ -30,6 +30,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    /**
+     * konfiguracja proxy i autoryzacji przy wokorzystaniu spring security
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().authorizeRequests()
@@ -78,6 +83,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().headers().frameOptions().disable().and().csrf().disable();
     }
 
+    /**
+     * zapytanie sql pobierajace uzytkownikow, ich role oraz aktywnosc
+     * @param auth
+     * @throws Exception
+     */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)

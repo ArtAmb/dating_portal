@@ -15,12 +15,24 @@ public class RegisterBrokerService {
     private final NotificationRepository notificationRepository;
     private final ConcurrentHashMap<Long, LinkedBlockingQueue<NotificationWithMessage>> map = new ConcurrentHashMap<>();
 
+    /**
+     * rejestruje uzytkownika w brokerze wiadomosci - bedzie on otrzymywal notifikacje z chatu
+     * Jezeli uzytkownik jest juz zarejestrowany metoda nic nie zrobi
+     * @param userId
+     */
     public void register(Long userId) {
         if (!map.containsKey(userId)) {
             map.put(userId, new LinkedBlockingQueue<>());
         }
     }
 
+    /**
+     * Uzytkownik najpier jest rejestrowany w brokerze. Oczekuje on na jpoawienie sie notyfikacji.
+     * Metoda wykorzystywana w chacie i websocketach
+     * @param userId
+     * @return notyfikacja wraz z wiadomoscia z chatu
+     * @throws InterruptedException
+     */
     public NotificationWithMessage subscribe(Long userId) throws InterruptedException {
         register(userId);
 
@@ -30,6 +42,11 @@ public class RegisterBrokerService {
         return notification;
     }
 
+    /**
+     * publikowanie wiadomosci - zapisanie danych w bazie oraz propagacja do zarejestrowanych uzytkownikow ktorych dotyczy notyfikacja
+     * @param notification
+     * @param message
+     */
     public void publish(Notification notification, Message message) {
         try {
             String uuid = UUID.randomUUID().toString();

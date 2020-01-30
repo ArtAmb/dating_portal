@@ -20,7 +20,12 @@ public class UserSearchService {
     private final UserProfilRepository userProfilRepository;
     private final TagRepository tagRepository;
 
-
+    /**
+     * algorytm wyszukania uzytkownikow po tagach, regionie i plci
+     * Dane so pobierane po lognie zalogoanego uzytkownika
+     * @param principal
+     * @return 10 potencjalnych partnerow posiadajaych najwyzszy wspolczynnik dopasowania
+     */
     public List<PotentialPartnerView> matchUsersForUser(Principal principal) {
         long userId = userRepository.findByLogin(principal.getName()).getId();
         UserSearchInfo conf = userSearchInfoRepository.findByUserId(userId).get();
@@ -97,6 +102,11 @@ public class UserSearchService {
         throw new IllegalStateException("Algorithm " + conf.getAlgorithmType().name() + " is not handled!");
     }
 
+    /**
+     * aktualizacja preferecji do partnera
+     * @param dto
+     * @param principal
+     */
     public void updateAdditionalSearchInfo(UpdateSearchInfoDTO dto, Principal principal) {
         long userId = userRepository.findByLogin(principal.getName()).getId();
         UserSearchInfo conf = userSearchInfoRepository.findByUserId(userId).get();

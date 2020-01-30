@@ -22,11 +22,18 @@ public class AuthorizationController {
     private final CreateUserService userService;
     private final UserRepository userRepository;
 
+    /**
+     * Tworzy uzytkownika
+     * @see AppUser
+     */
     @PostMapping("/register")
     public void register(@RequestBody AppUser user) {
         userService.createUser(user);
     }
 
+    /**
+     * Pobiera dane o zalogowanym uzytkowniku
+     */
     @GetMapping("/user-info")
     public UserInfo getUserInfo(Principal principal) {
         AppUser user = userRepository.findByLogin(principal.getName());

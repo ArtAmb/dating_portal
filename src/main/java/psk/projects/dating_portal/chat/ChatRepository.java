@@ -18,6 +18,9 @@ interface ChatContributorRepository extends CrudRepository<ChatContributor, Long
 interface MessageRepository extends JpaRepository<Message, Long> {
     List<Message> findByChatId(Long chatId, Pageable pageable);
 
+    /**
+     * Native query stworzone dla pobierania historycznych wpisow na chacie
+     */
     @Query(value="SELECT msg.* FROM MESSAGE msg where msg.CHAT_ID = ?1 order by msg.DATE_TIME DESC limit ?2 offset ?3", nativeQuery = true)
     List<Message> findByChatIdWithLimitAndOffset(Long chatId, int limit, int offset);
 }

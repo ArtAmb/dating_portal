@@ -25,17 +25,31 @@ public class CreateUserService {
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 
+    /**
+     * Tworzy użytkownika o zwyklej roli
+     * @see AppUser
+     */
     @Transactional
     public Long createUser(AppUser user) {
         return createUser(user, Collections.singletonList(Roles.ROLE_NORMAL.toRole()));
     }
 
+    /**
+     * Tworzy użytkownika o roli admina
+     * @see AppUser
+     */
     @Transactional
     public Long createAdmin(AppUser user) {
         List<Role> allRoles = Stream.of(Roles.values()).map(Roles::toRole).collect(Collectors.toList());
         return createUser(user, allRoles);
     }
 
+    /**
+     * Podstawowa metoda tworzenia użytkownikow. Utworzony uzytkownika bedzie miał przypisane role z parametru
+     * @param  user dane o uzytkowniku
+     * @param  roles role które maja zostac przypisane
+     * @see AppUser
+     */
     public Long createUser(AppUser user, List<Role> roles) {
         Assert.notNull(user.getLogin(), "login is required");
         Assert.notNull(user.getPassword(), "password is required");

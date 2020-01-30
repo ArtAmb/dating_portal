@@ -21,7 +21,9 @@ public class Initializer {
     private final UserRepository userRepo;
     private final ChatRepository chatRepository;
 
-
+    /**
+     * inicjalizacja systemu testowymi danymi
+     */
     @PostConstruct
     void initApplication() {
         addSystemUsers();

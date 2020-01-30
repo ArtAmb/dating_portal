@@ -23,6 +23,9 @@ public class ChatService {
     private final RegisterBrokerService registerBrokerService;
 
 
+    /**
+     * Pobranie wszystkich chatow zalogowane uzytkownika
+     */
     public List<ChatViewDTO> getAllChats(Principal principal) {
         Long userId = userRepository.findByLogin(principal.getName()).getId();
         List<Chat> chats = chatRepository.findBySearchInfoLike("%" + userId + "%");
@@ -54,6 +57,9 @@ public class ChatService {
         return messageRepository.findByChatId(chatId, PageRequest.of(page, 10, Sort.by("dateTime").descending()));
     }
 
+    /**
+     * dodanie nowej wiadomosci, jezeli chat nie istnieje jest on tworzony
+     */
     @Transactional
     public void addChat(AddMessageCommand command) {
         Chat chat = findChat(command);
@@ -100,6 +106,10 @@ public class ChatService {
         return chats.get(0);
     }
 
+    /**
+     * dodanie nowej wiadomosci, wszyscy uztkownicy powiazani z chatem
+     * otrzymuja notifikacje i za pomoca websocketow odswiezaja chat
+     */
     public Message addNewMessage(NewMessage newMessage) {
         Message msg = Message.builder()
                 .userId(newMessage.getUserId())
@@ -125,6 +135,13 @@ public class ChatService {
         return msgToPublish;
     }
 
+    /**
+     * Pobranie wiadomosic z dla chatu - wykorzystywana w inicjajcji chatu lub pobieraniu danych histroycznych
+     * @param chatId id chatu
+     * @param msgCount wszystki pobrane na froncie wiadomosci
+     * @param limit ile wiadomosci chcemy uzyskac
+     * @return zostanie zwrocona lista wiadomosci posortowana po dacie wstawienia. lIczba elementow jest okreslona przez limit  i przesunienta o msgCount
+     */
     public List<Message> getChat(Long chatId, Integer msgCount, Integer limit) {
         return messageRepository.findByChatIdWithLimitAndOffset(chatId, limit, msgCount)
                 .stream()

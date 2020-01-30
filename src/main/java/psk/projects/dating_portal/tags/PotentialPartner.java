@@ -20,6 +20,10 @@ public class PotentialPartner {
         this.matchingRate = userTags.size();
     }
 
+    /**
+     * obliczenie podobienstwa do preferencji
+     * @param myPreferencesTag
+     */
     public void calculateMatchingRate(List<UserTag> myPreferencesTag) {
         Map<Long, Double> mapByTagId = myPreferencesTag.stream()
                 .collect(Collectors.toMap(UserTag::getTagId, u -> TagPriority.getValue(u.getPriority())));
