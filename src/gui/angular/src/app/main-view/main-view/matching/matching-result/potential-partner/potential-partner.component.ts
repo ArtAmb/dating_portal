@@ -4,6 +4,8 @@ import { NotificationService } from "src/app/utils/notificationService.service";
 import { ImageInfo } from "../../../user-images/user-images.component";
 import { MatDialog } from "@angular/material/dialog";
 import { PotentialPartnerDialogComponent } from "./potential-partner-dialog/potential-partner-dialog.component";
+import { WelcomeMessageDialogComponent } from "src/app/chat/all-user-chats/chat/welcome-message/welcome-message-dialog/welcome-message-dialog.component";
+import { AuthenticationService } from "src/app/login-component/Authentication.service";
 
 @Component({
   selector: "app-potential-partner",
@@ -15,6 +17,7 @@ export class PotentialPartnerComponent implements OnInit {
   avatarImage: ImageInfo;
   constructor(
     private notificationService: NotificationService,
+    private authenticationService: AuthenticationService,
     private dialog: MatDialog
   ) {}
 
@@ -51,7 +54,14 @@ export class PotentialPartnerComponent implements OnInit {
     this.notificationService.showMessage("Wyslano zaproszenie");
   }
   sendMessage() {
-    this.notificationService.showMessage("Message");
+    this.authenticationService.getUserInfo().then(userInfo => {
+      this.dialog.open(WelcomeMessageDialogComponent, {
+        data: {
+          potentialPartner: this.potentialPartner,
+          userId: userInfo.userId
+        }
+      });
+    });
   }
   showMore() {
     this.dialog.open(PotentialPartnerDialogComponent, {

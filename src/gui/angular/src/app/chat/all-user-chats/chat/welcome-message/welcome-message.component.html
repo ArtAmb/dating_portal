@@ -1,3 +1,19 @@
-<p>
-  welcome-message works!
-</p>
+<div *ngIf="messageSent">
+  <h4>Pierwszy krok jest zawsze najtrudniejszy ale Ty masz już go za sobą!</h4>
+  <h4>Dobra robota!</h4>
+  <h4>Pozostaje czekać na rozwój sytuacji ;)</h4>
+</div>
+
+<div *ngIf="!messageSent">
+  <h3>{{ potentialPartner.login + " " }} Ci się spodobał? Świetny wybór!</h3>
+  <h4>Napisz wiadomości i pomóż przeznaczeniu!</h4>
+  <h4>Wykonaj pierwszy krok!</h4>
+
+  <textarea
+    rows="5"
+    cols="60"
+    (keyup.enter)="sendMsg()"
+    [(ngModel)]="welcomeMessage"
+  ></textarea>
+  <i class="material-icons md-18 clickable" (click)="sendMsg()">send</i>
+</div>

@@ -1,12 +1,13 @@
 package psk.projects.dating_portal.chat;
 
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
 
 import java.util.Set;
 
-@Value
+@Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AddMessageCommand {
     private Set<Long> usersIds;
     private Long chatId;

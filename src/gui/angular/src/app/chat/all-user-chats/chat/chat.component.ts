@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { Observable } from "rxjs";
 import { environment } from "./../../../../environments/environment";
 import { Client } from "stompjs";
+import { ChatViewDTO } from "../chat.service";
 
 @Component({
   selector: "app-chat",
@@ -16,6 +17,8 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this._connectToServer();
   }
+
+  @Input() chat: ChatViewDTO;
 
   private client: Client;
   inputChatMessage: String;

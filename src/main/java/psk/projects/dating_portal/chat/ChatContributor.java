@@ -2,6 +2,7 @@ package psk.projects.dating_portal.chat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class ChatContributor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,6 +19,5 @@ public class ChatContributor {
 
     @Column(nullable = false)
     Long userId;
-    @Column(nullable = false)
     String chatNickname;
 }

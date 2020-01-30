@@ -1,17 +1,18 @@
 package psk.projects.dating_portal.auth;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import psk.projects.dating_portal.profil.UserProfil;
-import psk.projects.dating_portal.profil.UserProfilRepository;
+import lombok.Value;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
+import java.security.Principal;
+
+@Builder
+@Value
+class UserInfo {
+    Long userId;
+    String login;
+}
 
 @RequiredArgsConstructor
 @RestController
@@ -19,9 +20,19 @@ import java.util.Collections;
 public class AuthorizationController {
 
     private final CreateUserService userService;
+    private final UserRepository userRepository;
 
     @PostMapping("/register")
     public void register(@RequestBody AppUser user) {
-       userService.createUser(user);
+        userService.createUser(user);
+    }
+
+    @GetMapping("/user-info")
+    public UserInfo getUserInfo(Principal principal) {
+        AppUser user = userRepository.findByLogin(principal.getName());
+
+        return UserInfo.builder()
+                .userId(user.getId())
+                .login(user.getLogin()).build();
     }
 }

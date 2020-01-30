@@ -22,22 +22,24 @@ import {
   ImageDialogComponent
 } from "./main-view/main-view/gallery/image/image.component";
 import { MatDialogModule } from "@angular/material/dialog";
-import {ProfilEditComponent} from "./profil-edit/profil-edit.component";
+import { ProfilEditComponent } from "./profil-edit/profil-edit.component";
 import { UserAvatarComponent } from "./main-view/main-view/user-avatar/user-avatar.component";
 import { TagsConfigurationComponent } from "./admin/tags-configuration/tags-configuration.component";
 import { TagComponentComponent } from "./admin/tags-configuration/tags-category-component/tag-component/tag-component.component";
 import { TagsCategoryComponentComponent } from "./admin/tags-configuration/tags-category-component/tags-category-component.component";
 import { UserTagsComponent } from "./main-view/main-view/user-tags/user-tags.component";
 import { UserTagComponent } from "./main-view/main-view/user-tags/user-tag/user-tag.component";
-import {ProfilViewComponent} from "./profil-view/profil-view.component";
-import {FriendsViewComponent} from "./main-view/main-view/friends-view/friends-view.component";
+import { ProfilViewComponent } from "./profil-view/profil-view.component";
+import { FriendsViewComponent } from "./main-view/main-view/friends-view/friends-view.component";
 import { MatchingButtonComponent } from "./main-view/main-view/matching/matching-button/matching-button.component";
 import { MatchingResultComponent } from "./main-view/main-view/matching/matching-result/matching-result.component";
-import {ProfilPicComponent} from "./main-view/main-view/profil-pic/profil-pic.component";
+import { ProfilPicComponent } from "./main-view/main-view/profil-pic/profil-pic.component";
 import { PotentialPartnerComponent } from "./main-view/main-view/matching/matching-result/potential-partner/potential-partner.component";
 import { PotentialPartnerDialogComponent } from "./main-view/main-view/matching/matching-result/potential-partner/potential-partner-dialog/potential-partner-dialog.component";
 import { AllUserChatsComponent } from "./chat/all-user-chats/all-user-chats.component";
 import { ChatComponent } from "./chat/all-user-chats/chat/chat.component";
+import { WelcomeMessageDialogComponent } from "./chat/all-user-chats/chat/welcome-message/welcome-message-dialog/welcome-message-dialog.component";
+import { WelcomeMessageComponent } from "./chat/all-user-chats/chat/welcome-message/welcome-message.component";
 
 @NgModule({
   imports: [
@@ -66,6 +68,8 @@ import { ChatComponent } from "./chat/all-user-chats/chat/chat.component";
     ChatComponent,
     PotentialPartnerDialogComponent,
     ImageDialogComponent,
+    WelcomeMessageComponent,
+    WelcomeMessageDialogComponent,
     UserImagesComponent,
     UserAvatarComponent,
     UserTagComponent,
@@ -90,7 +94,12 @@ import { ChatComponent } from "./chat/all-user-chats/chat/chat.component";
       multi: true
     }
   ],
-  entryComponents: [ImageComponent, ImageDialogComponent, PotentialPartnerDialogComponent]
+  entryComponents: [
+    ImageComponent,
+    ImageDialogComponent,
+    PotentialPartnerDialogComponent,
+    WelcomeMessageDialogComponent
+  ]
 })
 export class AppModule {}
 // RouterModule.forRoot([{ path: '', component: LoginComponentComponent }])

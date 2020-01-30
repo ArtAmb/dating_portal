@@ -10,7 +10,8 @@ import {
 } from "@angular/common/http";
 import { environment } from "./../../environments/environment";
 import { Observable, BehaviorSubject } from "rxjs";
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
+import { resolve } from "url";
 
 @Injectable({
   providedIn: "root"
@@ -19,12 +20,13 @@ export class AuthenticationService {
   constructor(
     private notifyService: NotificationService,
     private http: HttpClient,
-    private router : Router,
+    private router: Router,
     private loginServiceService: LoginServiceService
   ) {}
 
   ENV = environment;
   private _behaviorSubject = new BehaviorSubject(null);
+  private authenticatedUser: UserInfo = null;
 
   private AUTH_KEY = "funny_authentication";
   private LOGGED_USER_KEY = "logged_user";
@@ -33,11 +35,15 @@ export class AuthenticationService {
     this._login(user).subscribe(
       res => {
         this.notifyService.success("Zalogowano");
-        this.loginServiceService.checkIfAuthorized().subscribe(authObj => {
-          console.log(authObj);
-          localStorage.setItem(this.LOGGED_USER_KEY, JSON.stringify(authObj));
-        },
-        err => this.notifyService.failure(err));
+        this._saveAuthenticatedUser();
+
+        this.loginServiceService.checkIfAuthorized().subscribe(
+          authObj => {
+            console.log(authObj);
+            localStorage.setItem(this.LOGGED_USER_KEY, JSON.stringify(authObj));
+          },
+          err => this.notifyService.failure(err)
+        );
 
         localStorage.setItem(this.AUTH_KEY, "true");
         this._behaviorSubject.next("LOGIN");
@@ -48,14 +54,23 @@ export class AuthenticationService {
     );
   }
 
+  private _saveAuthenticatedUser() {
+    this._getUserInfo().subscribe(res => {
+      this.authenticatedUser = res;
+    }, err => {
+      this.notifyService.failure(err);
+    });
+  }
+
   public logout() {
     this._logout().subscribe(
       res => {
+        this.authenticatedUser = null;
         this.notifyService.success("Wylogowano pomyślnie");
         localStorage.setItem(this.AUTH_KEY, "false");
         this._behaviorSubject.next("LOGOUT");
 
-        this.router.navigate(['']);
+        this.router.navigate([""]);
       },
       err => {
         this.notifyService.failure(err);
@@ -104,4 +119,29 @@ export class AuthenticationService {
       withCredentials: true
     });
   }
+
+  private _getUserInfo(): Observable<any> {
+    return this.http.get(this.ENV.server_url + "/user-info");
+  }
+
+  public getUserInfo(): Promise<UserInfo> {
+    return new Promise((resolve, reject) => {
+      if (this.authenticatedUser) {
+        resolve(this.authenticatedUser);
+      } else {
+        this._getUserInfo().subscribe(res => {
+          this.authenticatedUser = res;
+          resolve(this.authenticatedUser);
+        }, err => {
+          this.notifyService.failure(err);
+          reject();
+        });
+      }
+    });
+  }
+}
+
+export class UserInfo {
+  login: string;
+  userId: number;
 }
