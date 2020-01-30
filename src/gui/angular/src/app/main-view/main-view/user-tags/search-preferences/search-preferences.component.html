@@ -1,0 +1,8 @@
+<select [(ngModel)]="algorithm" (change)="updateAlgorithm()">
+  <option value="LOOKING_FOR_MYSELF">Szukaj podobnej osoby do mnie</option>
+  <option value="LOOKING_FOR_MY_PREFERENCES">Szukaj zgodnie z preferencjami</option>
+</select>
+
+<div *ngIf="algorithm == 'LOOKING_FOR_MY_PREFERENCES'">
+  <app-user-tags [context]="'PARTNER'"></app-user-tags>
+</div>

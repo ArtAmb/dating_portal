@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import {
   TagsCategory,
   TagConfService
@@ -18,6 +18,7 @@ export class UserTagsComponent implements OnInit {
     private userTagsContainerService: UserTagsContainerService
   ) {}
 
+  @Input() context = 'MYSELF';
   allTagsCategory: Array<TagsCategory> = [];
   ngOnInit() {
     this.userTagsContainerService.fill();

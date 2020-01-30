@@ -41,6 +41,7 @@ import { ChatComponent } from "./chat/all-user-chats/chat/chat.component";
 import { WelcomeMessageDialogComponent } from "./chat/all-user-chats/chat/welcome-message/welcome-message-dialog/welcome-message-dialog.component";
 import { WelcomeMessageComponent } from "./chat/all-user-chats/chat/welcome-message/welcome-message.component";
 import {ProfilFiltersComponent} from "./main-view/main-view/profil-filters/profil-filters.component";
+import { SearchPreferencesComponent } from "./main-view/main-view/user-tags/search-preferences/search-preferences.component";
 
 @NgModule({
   imports: [
@@ -68,6 +69,7 @@ import {ProfilFiltersComponent} from "./main-view/main-view/profil-filters/profi
     AllUserChatsComponent,
     ChatComponent,
     PotentialPartnerDialogComponent,
+    SearchPreferencesComponent,
     ImageDialogComponent,
     WelcomeMessageComponent,
     WelcomeMessageDialogComponent,
