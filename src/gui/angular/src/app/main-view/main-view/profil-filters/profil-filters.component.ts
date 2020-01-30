@@ -30,20 +30,20 @@ export class ProfilFiltersComponent implements OnInit {
   ngOnInit(): void {
     this.profilFiltersService.getSearchInfo().subscribe(
       res => {
-        // this.preferredGender = res.preferredGender
-        //   ? GENDER[res.preferredGender]
-        //   : GENDER.Default;
+        this.preferredGender = res.preferredGender
+          ? <GENDER><unknown>GENDER[res.preferredGender]
+          : GENDER.Default;
 
-        // console.log(this.preferredGender);
-        // this.preferredRegion = REGION[res.preferredRegion]
-        //   ? res.preferredRegion
-        //   : REGION.Default;
-        // this.preferredEyeColor = EYE_COLOR[res.preferredEyeColor]
-        //   ? res.preferredEyeColor
-        //   : EYE_COLOR.Default;
-        // this.preferredHairColor = HAIR_COLOR[res.preferredHairColor]
-        //   ? res.preferredHairColor
-        //   : HAIR_COLOR.Default;
+        console.log(this.preferredGender);
+        this.preferredRegion = res.preferredRegion
+          ? <REGION><unknown>REGION[res.preferredRegion]
+          : REGION.Default;
+        this.preferredEyeColor = res.preferredEyeColor
+          ? <EYE_COLOR><unknown>EYE_COLOR[res.preferredEyeColor]
+          : EYE_COLOR.Default;
+        this.preferredHairColor = res.preferredHairColor
+          ? <HAIR_COLOR><unknown>HAIR_COLOR[res.preferredHairColor]
+          : HAIR_COLOR.Default;
       },
       err => {
         this.notificationService.failure(err);
