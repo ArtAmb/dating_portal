@@ -96,6 +96,7 @@ public class GalleryService {
 
         Gallery gallery = galleryRepository.findById(updateGalleryDTO.getGalleryId()).get();
         gallery.setTitle(updateGalleryDTO.getGalleryName());
+        gallery.setAccessScope(updateGalleryDTO.getAccessScope());
         galleryRepository.save(gallery);
     }
 

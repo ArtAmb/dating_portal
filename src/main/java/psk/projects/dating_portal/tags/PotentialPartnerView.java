@@ -12,7 +12,7 @@ public class PotentialPartnerView {
     Long imageAvatarId;
     String description;
     String login;
-    long matchingRate;
+    double matchingRate;
 
     List<PartnerTag> tags;
 }

@@ -35,21 +35,23 @@ public class UserSearchService {
                 .collect(Collectors.groupingBy(UserTag::getUserId))
                 .entrySet().stream()
                 .map(es -> new PotentialPartner(es.getKey(), es.getValue()))
+                .peek(pp -> pp.calculateMatchingRate(myPreferencesTag))
                 .collect(Collectors.toList());
 
         return potentialPartners.stream()
-                .filter(pp -> { if(pp.getUserId() == userId) return false;
+                .filter(pp -> {
+                    if (pp.getUserId() == userId) return false;
                     UserProfil profil = userProfilRepository.findByUserId(pp.getUserId());
 
-                    if(conf.preferredGender!=GENDER.Default && conf.preferredGender!=profil.getGender())
+                    if (conf.preferredGender != GENDER.Default && conf.preferredGender != profil.getGender())
                         return false;
 
-                    if(conf.preferredRegion!= REGION.Default && conf.preferredRegion!=profil.getRegion())
+                    if (conf.preferredRegion != REGION.Default && conf.preferredRegion != profil.getRegion())
                         return false;
 
                     return true;
                 })
-                .sorted(Comparator.comparingInt(PotentialPartner::getMatchingRate).reversed())
+                .sorted(Comparator.comparingDouble(PotentialPartner::getMatchingRate).reversed())
                 .limit(10)
                 .map(pp -> {
                     UserProfil profil = userProfilRepository.findByUserId(pp.getUserId());
@@ -99,11 +101,10 @@ public class UserSearchService {
         conf.setPreferredRegion(dto.region);
 
 
-
         userSearchInfoRepository.save(conf);
 
         conf = userSearchInfoRepository.findByUserId(userId).get();
 
-        System.out.println("plec: "+conf.preferredGender + " region: "+conf.preferredRegion);
+        System.out.println("plec: " + conf.preferredGender + " region: " + conf.preferredRegion);
     }
 }

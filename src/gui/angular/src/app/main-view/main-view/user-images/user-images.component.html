@@ -1,7 +1,12 @@
 
 <h2 class = "row">Galeria</h2>
 <div class = "row" *ngFor="let oneGallery of allGalleries">
-  <app-gallery [detailModeOn]="detailModeOn" [gallery]="oneGallery"></app-gallery>
+  <div *ngIf="detailModeOn && oneGallery.accessScope == 'PUBLIC'">
+    <app-gallery [detailModeOn]="detailModeOn" [gallery]="oneGallery"></app-gallery>
+  </div>
+  <div *ngIf="!detailModeOn">
+    <app-gallery [detailModeOn]="detailModeOn" [gallery]="oneGallery"></app-gallery>
+  </div>
 </div>
 
 <div class = "row" *ngIf="!detailModeOn && newGalleryModeEnable">
