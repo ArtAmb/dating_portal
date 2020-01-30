@@ -3,10 +3,7 @@ package psk.projects.dating_portal.tags;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import psk.projects.dating_portal.auth.UserRepository;
-import psk.projects.dating_portal.profil.GENDER;
-import psk.projects.dating_portal.profil.REGION;
-import psk.projects.dating_portal.profil.UserProfil;
-import psk.projects.dating_portal.profil.UserProfilRepository;
+import psk.projects.dating_portal.profil.*;
 
 import java.security.Principal;
 import java.util.Comparator;
@@ -47,6 +44,12 @@ public class UserSearchService {
                         return false;
 
                     if (conf.preferredRegion != REGION.Default && conf.preferredRegion != profil.getRegion())
+                        return false;
+
+                    if (conf.preferredEyeColor != EYE_COLOR.Default && conf.preferredEyeColor != profil.getEyeColor())
+                        return false;
+
+                    if (conf.preferredHairColor != HAIR_COLOR.Default && conf.preferredHairColor != profil.getHairColor())
                         return false;
 
                     return true;
@@ -99,12 +102,14 @@ public class UserSearchService {
         UserSearchInfo conf = userSearchInfoRepository.findByUserId(userId).get();
         conf.setPreferredGender(dto.gender);
         conf.setPreferredRegion(dto.region);
+        conf.setPreferredEyeColor(dto.eyeColor);
+        conf.setPreferredHairColor(dto.hairColor);
 
 
         userSearchInfoRepository.save(conf);
 
         conf = userSearchInfoRepository.findByUserId(userId).get();
 
-        System.out.println("plec: " + conf.preferredGender + " region: " + conf.preferredRegion);
+        System.out.println("plec: " + conf.preferredGender + " region: " + conf.preferredRegion+" eye: " + conf.preferredEyeColor + " hair: " + conf.preferredHairColor);
     }
 }

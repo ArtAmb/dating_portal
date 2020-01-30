@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {GENDER, REGION} from "src/app/profil-edit/profil-edit.component";
-import {AuthenticationService} from "../../../login-component/Authentication.service";
+import {EYE_COLOR, GENDER, HAIR_COLOR, REGION} from "src/app/profil-edit/profil-edit.component";
 import {ProfilFiltersService} from "./profil-filters-service.component";
 import {NotificationService} from "../../../utils/notificationService.service";
 
@@ -14,6 +13,9 @@ export class ProfilFiltersComponent implements OnInit{
 
     preferredGender : GENDER = GENDER.Default;
     preferredRegion : REGION = REGION.Default;
+    preferredEyeColor : EYE_COLOR = EYE_COLOR.Default;
+    preferredHairColor : HAIR_COLOR = HAIR_COLOR.Default;
+
 
     prefAgeMin : number = 0;
     prefAgeMax : number = 100;
@@ -28,7 +30,7 @@ export class ProfilFiltersComponent implements OnInit{
     }
 
     update(){
-        this.profilFiltersService.updateSearchInfo({gender: this.preferredGender,region: this.preferredRegion}).subscribe(
+        this.profilFiltersService.updateSearchInfo({gender: this.preferredGender,region: this.preferredRegion, eyeColor: this.preferredEyeColor, hairColor: this.preferredHairColor}).subscribe(
             res=>{this.notificationService.success("Filtry zaktualizowane"),
                     err=>{this.notificationService.failure("Błąd")}});
     }

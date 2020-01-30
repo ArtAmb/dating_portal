@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import psk.projects.dating_portal.profil.EYE_COLOR;
 import psk.projects.dating_portal.profil.GENDER;
+import psk.projects.dating_portal.profil.HAIR_COLOR;
 import psk.projects.dating_portal.profil.REGION;
 
 import java.security.Principal;
@@ -19,6 +21,8 @@ import java.security.Principal;
 class UpdateSearchInfoDTO {
     GENDER gender;
     REGION region;
+    EYE_COLOR eyeColor;
+    HAIR_COLOR hairColor;
 }
 
 @RestController

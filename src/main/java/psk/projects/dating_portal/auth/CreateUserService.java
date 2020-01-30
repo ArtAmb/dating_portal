@@ -70,6 +70,8 @@ public class CreateUserService {
                 .algorithmType(PartnerSearchAlgorithm.LOOKING_FOR_MYSELF)
                 .preferredGender(GENDER.Default)
                 .preferredRegion(REGION.Default)
+                .preferredEyeColor(EYE_COLOR.Default)
+                .preferredHairColor(HAIR_COLOR.Default)
                 .tagsInfo("").build();
 
         userSearchInfoRepository.save(searchConfig);

@@ -10,6 +10,16 @@
                 Preferowane województwo:
             </div>
         </td>
+        <td>
+            <div class="row label">
+                Preferowana kolor oczu:
+            </div>
+        </td>
+        <td>
+            <div class="row label">
+                Preferowane kolor włosów:
+            </div>
+        </td>
 
     </tr>
 
@@ -44,6 +54,29 @@
                     <option value="14">wielkopolskie</option>
                     <option value="15">zachodniopomorskie</option>
                     <option value="16">Brak</option>
+                </select>
+            </div>
+        </td>
+        <td>
+            <div class="row">
+                <select [(ngModel)]="preferredEyeColor" >
+                    <option value="0">Niebieskie</option>
+                    <option value="1">Brązowe</option>
+                    <option value="2">Zielone</option>
+                    <option value="3">Piwne</option>
+                    <option value="4">Szare</option>
+                    <option value="5">Brak</option>
+                </select>
+            </div>
+        </td>
+        <td>
+            <div class="row">
+                <select [(ngModel)]="preferredHairColor" >
+                    <option value="0">Brązowy</option>
+                    <option value="1">Blond</option>
+                    <option value="2">Czarny</option>
+                    <option value="3">Rudy</option>
+                    <option value="4">Brak</option>
                 </select>
             </div>
         </td>

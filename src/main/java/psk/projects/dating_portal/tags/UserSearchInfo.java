@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import psk.projects.dating_portal.profil.EYE_COLOR;
 import psk.projects.dating_portal.profil.GENDER;
+import psk.projects.dating_portal.profil.HAIR_COLOR;
 import psk.projects.dating_portal.profil.REGION;
 
 import javax.persistence.*;
@@ -35,6 +37,14 @@ public class UserSearchInfo {
     @Enumerated
     @Column(nullable = false)
     REGION preferredRegion;
+
+    @Enumerated
+    @Column(nullable = false)
+    EYE_COLOR preferredEyeColor;
+
+    @Enumerated
+    @Column(nullable = false)
+    HAIR_COLOR preferredHairColor;
 }
 
 
