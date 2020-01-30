@@ -1,22 +1,28 @@
-<div *ngIf="chats.length == 0">
-  Brak rozmów
+<div *ngIf="chosenChat">
+  <app-chat [chat]="chosenChat"></app-chat>
 </div>
 
-<div *ngFor="let oneChat of chats">
-  <div class="row one-chat" (click)="openChat(oneChat)">
-    <div class="col" *ngIf="oneChat.lastMessage">
-      {{ oneChat.recipientLogin }}
-    </div>
-    <div class="col" *ngIf="oneChat.lastMessage">
-      {{
-        oneChat.myUserId == oneChat.lastMessage.userId
-          ? "Ja"
-          : getLogin(oneChat)
-      }}
-      {{ ": " + oneChat.lastMessage.message }}
-    </div>
-    <div class="col" *ngIf="oneChat.lastMessage">
-      {{ oneChat.lastMessage.dateTime }}
+<div *ngIf="!chosenChat">
+  <div *ngIf="chats.length == 0">
+    Brak rozmów
+  </div>
+
+  <div *ngFor="let oneChat of chats">
+    <div class="row one-chat" (click)="openChat(oneChat)">
+      <div class="col" *ngIf="oneChat.lastMessage">
+        {{ oneChat.recipientLogin }}
+      </div>
+      <div class="col" *ngIf="oneChat.lastMessage">
+        {{
+          oneChat.myUserId == oneChat.lastMessage.userId
+            ? "Ja"
+            : getLogin(oneChat)
+        }}
+        {{ ": " + oneChat.lastMessage.message }}
+      </div>
+      <div class="col" *ngIf="oneChat.lastMessage">
+        {{ oneChat.lastMessage.dateTime }}
+      </div>
     </div>
   </div>
 </div>

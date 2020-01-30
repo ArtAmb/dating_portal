@@ -19,6 +19,13 @@ public class ChatRestController {
         chatService.addChat(command);
     }
 
+
+    @PostMapping("new-message")
+    public Message addNewMessage(@RequestBody NewMessage command) {
+        return chatService.addNewMessage(command);
+    }
+
+
     @GetMapping("get-all-chats")
     public List<ChatViewDTO> getAllChats(Principal principal) {
         return chatService.getAllChats(principal);

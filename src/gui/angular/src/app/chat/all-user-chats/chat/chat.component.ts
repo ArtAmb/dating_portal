@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from "@angular/core";
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
+import * as Stomp from "stompjs";
+import * as SockJS from "sockjs-client";
 import { Observable } from "rxjs";
 import { environment } from "./../../../../environments/environment";
 import { Client } from "stompjs";
-import { ChatViewDTO } from "../chat.service";
+import { ChatViewDTO, ChatService } from "../chat.service";
+import { NotificationService } from "src/app/utils/notificationService.service";
 
 @Component({
   selector: "app-chat",
@@ -12,7 +13,10 @@ import { ChatViewDTO } from "../chat.service";
   styleUrls: ["./chat.component.css"]
 })
 export class ChatComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private chatService: ChatService,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     this._connectToServer();
@@ -23,19 +27,58 @@ export class ChatComponent implements OnInit {
   private client: Client;
   inputChatMessage: String;
 
+  messages: Array<ChatMessage> = [];
 
-  public sendMsg() {
-    this.client.send("/app/send/message", {}, JSON.stringify(this.inputChatMessage));
-    this.inputChatMessage = null;
+  public getLogin(chat: ChatViewDTO): String {
+    return this.chatService.getChatLogin(chat.recipientLogin, chat.recipientChatLogin);
   }
 
-  private _connectToServer() {
+  public sendMsg() {
+    this.chatService
+      .addNewMessage({
+        userId: this.chat.myUserId,
+        chatId: this.chat.chatId,
+        message: this.inputChatMessage
+      })
+      .subscribe(
+        res => {
+          this.messages.push(res);
+          this.inputChatMessage = null;
+        },
+        err => {
+          this.notificationService.failure(err);
+        }
+      );
+  }
+
+  private _subscribeForNotifications() {
+    this.client.send(
+      "/app/send/message",
+      {},
+      JSON.stringify({
+        userId: this.chat.myUserId,
+        chatId: this.chat.chatId
+      }));
+  }
+
+  private _connectToServer() { 
     this.client = Stomp.over(new SockJS(environment.server_url + "/chat"));
-    this.client.connect({}, () => { 
+    this.client.connect({}, () => {
+      this._subscribeForNotifications();
+
       this.client.subscribe("/topic/refresh/messages", msg => {
         console.log(msg);
-        console.log("Im working!!!");
+        let obj = JSON.parse(msg.body);
+        this.messages.push(obj.message);
+        this._subscribeForNotifications();
       });
     });
   }
+}
+
+
+export class ChatMessage {
+  userId: number;
+  dateTime: any;
+  message: String;
 }

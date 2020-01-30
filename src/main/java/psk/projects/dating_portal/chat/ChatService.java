@@ -19,6 +19,7 @@ public class ChatService {
     private final UserRepository userRepository;
     private final ChatContributorRepository chatContributorRepository;
     private final MessageRepository messageRepository;
+    private final RegisterBrokerService registerBrokerService;
 
 
     public List<ChatViewDTO> getAllChats(Principal principal) {
@@ -55,18 +56,17 @@ public class ChatService {
     @Transactional
     public void addChat(AddMessageCommand command) {
         Chat chat = findChat(command);
-        Message msg = Message.builder()
+        NewMessage msg = NewMessage.builder()
                 .userId(command.getUserId())
                 .message(command.getMessage())
-                .dateTime(LocalDateTime.now())
                 .chatId(chat.getId())
                 .build();
 
-        messageRepository.save(msg);
+        addNewMessage(msg);
     }
 
     private Chat findChat(AddMessageCommand command) {
-        if(command.getUsersIds().size() < 2)
+        if (command.getUsersIds().size() < 2)
             throw new IllegalStateException("Required at least 2 chat contributors");
 
         String query = command.getUsersIds().stream()
@@ -99,7 +99,28 @@ public class ChatService {
         return chats.get(0);
     }
 
-    public void addNewMessage(NewMessage message) {
+    public Message addNewMessage(NewMessage newMessage) {
+        Message msg = Message.builder()
+                .userId(newMessage.getUserId())
+                .message(newMessage.getMessage())
+                .dateTime(LocalDateTime.now())
+                .chatId(newMessage.getChatId())
+                .build();
 
+        Message msgToPublish = messageRepository.save(msg);
+        Chat chat = chatRepository.findById(newMessage.getChatId()).get();
+        chat.getContributors()
+                .stream()
+                .filter(chatContributor -> chatContributor.getUserId() != null)
+                .filter(chatContributor -> !chatContributor.getUserId().equals(newMessage.getUserId()))
+                .forEach(chatContributor -> {
+                    registerBrokerService.publish(Notification.builder()
+                            .triggerUserId(newMessage.getUserId())
+                            .type(NotificationType.NEW_MESSAGE)
+                            .userId(chatContributor.getUserId()).build(), msgToPublish);
+                });
+
+
+        return msgToPublish;
     }
 }

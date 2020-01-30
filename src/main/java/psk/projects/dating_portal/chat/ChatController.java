@@ -9,11 +9,11 @@ import org.springframework.stereotype.Controller;
 @AllArgsConstructor
 public class ChatController {
     private final ChatService chatService;
+    private final RegisterBrokerService registerBrokerService;
 
     @MessageMapping("/send/message")
     @SendTo("/topic/refresh/messages")
-    public String onReceivedMessage(NewMessage message) {
-        chatService.addNewMessage(message);
-        return "Gonna be ok!";
+    public NotificationWithMessage onReceivedMessage(NewMessage message) throws InterruptedException {
+        return registerBrokerService.subscribe(message.getUserId());
     }
 }

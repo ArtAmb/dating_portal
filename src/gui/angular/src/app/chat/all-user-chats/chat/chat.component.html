@@ -1,5 +1,25 @@
 <div class="row"></div>
 
+
+<div *ngFor="let oneMessage of messages">
+  <div class="row">
+    <div class="col" >
+      {{
+        oneMessage.userId == chat.myUserId
+          ? "Ja"
+          : getLogin(chat)
+      }}
+    </div>
+    <div class="col">
+      {{oneMessage.message}}
+    </div>
+    <div class="col">
+      {{ oneMessage.dateTime }}
+    </div>
+  </div>
+</div>
+
+
 <div class="row">
   <input (keyup.enter)="sendMsg()" [(ngModel)]="inputChatMessage" />
   <i class="material-icons md-18 clickable" (click)="sendMsg()">send</i>

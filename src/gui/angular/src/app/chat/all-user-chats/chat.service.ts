@@ -25,6 +25,15 @@ export class ChatService {
   }): Observable<any> {
     return this.http.post(environment.server_url + "/add-message", arg0);
   }
+
+
+  public addNewMessage(arg0: {
+    chatId: number;
+    userId: number;
+    message: String;
+  }): Observable<any> {
+    return this.http.post(environment.server_url + "/new-message", arg0);
+  }
 }
 
 export class ChatViewDTO {

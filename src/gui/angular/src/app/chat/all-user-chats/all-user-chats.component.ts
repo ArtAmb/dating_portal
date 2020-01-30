@@ -9,6 +9,7 @@ import { ChatService, ChatViewDTO } from "./chat.service";
 })
 export class AllUserChatsComponent implements OnInit {
   chats: Array<ChatViewDTO> = [];
+  chosenChat: ChatViewDTO = null;
 
   constructor(
     private chatService: ChatService,
@@ -33,6 +34,7 @@ export class AllUserChatsComponent implements OnInit {
 
   public openChat(chat: ChatViewDTO) {
     this.notificationService.showMessage("Im working!!!");
+    this.chosenChat = chat;
   }
 
 }
