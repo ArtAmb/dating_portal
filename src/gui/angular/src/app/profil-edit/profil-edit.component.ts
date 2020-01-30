@@ -23,7 +23,7 @@ export class Profil{
 export enum GENDER {
     Male = 1,
     Female = 2,
-    None = 3
+    Default = 3
 }
 
 export enum EYE_COLOR {
@@ -32,7 +32,7 @@ export enum EYE_COLOR {
     Green=2,
     Hazel=3,
     Gray=4,
-    Other=5
+    Default=5
 }
 
 export enum HAIR_COLOR {
@@ -40,7 +40,7 @@ export enum HAIR_COLOR {
     Blonde=1,
     Black=2,
     Red=3,
-    Other=4
+    Default=4
 }
 
 export enum REGION {
@@ -59,7 +59,8 @@ export enum REGION {
     Swietokrzyskie,
     Warminsko_mazurskie,
     Wielkopolskie,
-    Zachodniopomorskie
+    Zachodniopomorskie,
+    Default
 }
 
 @Component({

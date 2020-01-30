@@ -4,12 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import psk.projects.dating_portal.profil.GENDER;
-import psk.projects.dating_portal.profil.UserProfil;
+import psk.projects.dating_portal.profil.*;
 import psk.projects.dating_portal.tags.PartnerSearchAlgorithm;
 import psk.projects.dating_portal.tags.UserSearchInfo;
 import psk.projects.dating_portal.tags.UserSearchInfoRepository;
-import psk.projects.dating_portal.profil.UserProfilRepository;
 
 import javax.transaction.Transactional;
 import java.util.Collections;
@@ -56,9 +54,14 @@ public class CreateUserService {
         UserProfil userProfil = UserProfil.builder()
                 .userId(userId)
                 .displayLogin(user.getLogin())
-                .description("to jest nowy użytkownik")
+                .description("Nowy użytkownik.")
                 .birthDate(new Date())
-                .gender(GENDER.None)
+                .gender(GENDER.Default)
+                .hairColor(HAIR_COLOR.Default)
+                .region(REGION.Default)
+                .eyeColor(EYE_COLOR.Default)
+                .height(175)
+                .weight(60)
                 .build();
 
         userProfilRepo.save(userProfil);

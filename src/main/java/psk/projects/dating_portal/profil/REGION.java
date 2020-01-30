@@ -16,5 +16,6 @@ public enum REGION {
     Swietokrzyskie,
     Warminsko_mazurskie,
     Wielkopolskie,
-    Zachodniopomorskie
+    Zachodniopomorskie,
+    Default
 }

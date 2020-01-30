@@ -5,5 +5,5 @@ public enum HAIR_COLOR {
     Blonde,
     Red,
     Black,
-    Other
+    Default
 }

@@ -3,10 +3,9 @@ import {GENDER} from "../profil-edit/profil-edit.component";
 export function ConvertGender(g : any) : any {
 
     switch (g) {
-        case "None": return "Brak";
         case "Female": return "Kobieta";
         case "Male": return "Mężczyzna";
-        default: return "Brak";
+        case "Default": return "Brak";
     }
 
 }
@@ -19,8 +18,7 @@ export function ConvertEyeColor(g : any) : any {
         case "Green": return "Zielone";
         case "Hazel": return "Piwne";
         case "Gray": return "Szare";
-        case "Other": return "Inne";
-        default: return "Brak";
+        case "Default": return "Brak";
     }
 
 }
@@ -32,8 +30,7 @@ export function ConvertHairColor(g : any) : any {
         case "Blonde": return "Blond";
         case "Black": return "Czarny";
         case "Red": return "Rudy";
-        case "Other": return "Inne";
-        default: return "Brak";
+        case "Default": return "Brak";
     }
 
 }
@@ -57,7 +54,7 @@ export function ConvertRegion(g : any) : any {
         case "Warminsko_mazurskie": return "warmińsko-mazurskie";
         case "Wielkopolskie": return "wielkopolskie";
         case "Zachodniopomorskie": return "zachodniopomorskie";
-        default: return "Brak";
+        case "Default": return "Brak";
     }
 
 }

@@ -6,6 +6,6 @@ public enum EYE_COLOR {
     Green,
     Hazel,
     Gray,
-    Other
+    Default
 
 }
