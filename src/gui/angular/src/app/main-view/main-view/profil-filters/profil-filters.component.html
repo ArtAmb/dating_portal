@@ -1,0 +1,71 @@
+<table>
+    <tr>
+        <td>
+            <div class="row label">
+                Preferowana płeć:
+            </div>
+        </td>
+        <td>
+            <div class="row label">
+                Preferowane województwo:
+            </div>
+        </td>
+
+    </tr>
+
+    <tr>
+        <td>
+            <div class="row label">
+                <select [(ngModel)]="preferredGender" >
+                    <option value="1">Kobieta</option>
+                    <option value="0">Mężczyzna</option>
+                    <option value="2">Brak</option>
+                </select>
+            </div>
+        </td>
+
+        <td>
+            <div class="row">
+                <select [(ngModel)]="preferredRegion" >
+                    <option value="0">dolnośląskie</option>
+                    <option value="1">kujawsko-pomorskie</option>
+                    <option value="2">lubelskie</option>
+                    <option value="3">lubuskie</option>
+                    <option value="4">lodzkie</option>
+                    <option value="5">małopolskie</option>
+                    <option value="6">mazowieckie</option>
+                    <option value="7">opolskie</option>
+                    <option value="8">podkarpackie</option>
+                    <option value="9">podlaskie</option>
+                    <option value="10">pomorskie</option>
+                    <option value="11">śląskie</option>
+                    <option value="12">świętokrzyskie</option>
+                    <option value="13">warmińsko-mazurskie</option>
+                    <option value="14">wielkopolskie</option>
+                    <option value="15">zachodniopomorskie</option>
+                    <option value="16">Brak</option>
+                </select>
+            </div>
+        </td>
+        <td>
+            <div class="row">
+                <button (click)="update()">Aktualizuj</button>
+            </div>
+        </td>
+
+    </tr>
+
+
+
+
+
+
+
+
+
+</table>
+
+
+
+
+

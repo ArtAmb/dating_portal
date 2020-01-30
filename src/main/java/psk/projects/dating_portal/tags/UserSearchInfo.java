@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import psk.projects.dating_portal.profil.GENDER;
+import psk.projects.dating_portal.profil.REGION;
 
 import javax.persistence.*;
 
@@ -25,6 +27,9 @@ public class UserSearchInfo {
     PartnerSearchAlgorithm algorithmType;
 
     String tagsInfo;
+
+    GENDER preferredGender;
+    REGION preferredRegion;
 }
 
 

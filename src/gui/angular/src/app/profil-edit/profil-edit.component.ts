@@ -21,9 +21,9 @@ export class Profil{
 }
 
 export enum GENDER {
-    Male = 1,
-    Female = 2,
-    Default = 3
+    Male = 0,
+    Female = 1,
+    Default = 2
 }
 
 export enum EYE_COLOR {
@@ -82,11 +82,7 @@ export class ProfilEditComponent implements OnInit {
     isAuthenticated() {
         return this.authService.isAuthenticated();
 
-
-
     }
-
-
 
     save()
     {

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import psk.projects.dating_portal.auth.UserRepository;
+import psk.projects.dating_portal.profil.GENDER;
+import psk.projects.dating_portal.profil.REGION;
 
 import javax.transaction.Transactional;
 import java.security.Principal;
@@ -42,6 +44,7 @@ class UpdateUserTagDTO {
     boolean checked;
     TagPriority tagPriority;
 }
+
 
 @RestController
 @AllArgsConstructor
@@ -114,5 +117,7 @@ public class TagsController {
     public List<PotentialPartnerView> matchPartners(Principal principal) {
         return userSearchService.matchUsersForUser(principal);
     }
+
+
 
 }
