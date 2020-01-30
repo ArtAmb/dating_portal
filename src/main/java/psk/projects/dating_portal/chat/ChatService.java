@@ -9,6 +9,7 @@ import psk.projects.dating_portal.auth.UserRepository;
 import javax.transaction.Transactional;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,8 +29,8 @@ public class ChatService {
 
         return chats.stream().map(chat -> {
             ChatContributor recepient = chat.getContributors().stream()
-                    .filter(tmp -> tmp.getId() != null)
-                    .filter(tmp -> !tmp.getId().equals(userId))
+                    .filter(tmp -> tmp.getUserId() != null)
+                    .filter(tmp -> !tmp.getUserId().equals(userId))
                     .findFirst().get();
 
             List<Message> messages = findMessages(chat.getId(), 0);
@@ -122,5 +123,12 @@ public class ChatService {
 
 
         return msgToPublish;
+    }
+
+    public List<Message> getChat(Long chatId, Integer msgCount, Integer limit) {
+        return messageRepository.findByChatIdWithLimitAndOffset(chatId, limit, msgCount)
+                .stream()
+                .sorted(Comparator.comparing(Message::getDateTime))
+                .collect(Collectors.toList());
     }
 }

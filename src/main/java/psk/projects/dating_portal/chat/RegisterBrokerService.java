@@ -3,7 +3,9 @@ package psk.projects.dating_portal.chat;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 
 @Service
@@ -11,12 +13,11 @@ import java.util.concurrent.SynchronousQueue;
 public class RegisterBrokerService {
 
     private final NotificationRepository notificationRepository;
-    private final ConcurrentHashMap<Long, SynchronousQueue<NotificationWithMessage>> map = new ConcurrentHashMap<>();
-
+    private final ConcurrentHashMap<Long, LinkedBlockingQueue<NotificationWithMessage>> map = new ConcurrentHashMap<>();
 
     public void register(Long userId) {
         if (!map.containsKey(userId)) {
-            map.put(userId, new SynchronousQueue<>());
+            map.put(userId, new LinkedBlockingQueue<>());
         }
     }
 
@@ -31,12 +32,15 @@ public class RegisterBrokerService {
 
     public void publish(Notification notification, Message message) {
         try {
+            String uuid = UUID.randomUUID().toString();
             notification.setState(NotificationState.NEW);
             notification = notificationRepository.save(notification);
 
-            if (map.containsKey(notification.getTriggerUserId())) {
-                map.get(notification.getTriggerUserId()).put(NotificationWithMessage.builder().message(message).notification(notification).build());
+            System.out.println(uuid + " - BEFORE PUT");
+            if (map.containsKey(notification.getUserId())) {
+                map.get(notification.getUserId()).put(NotificationWithMessage.builder().message(message).notification(notification).build());
             }
+            System.out.println(uuid + " - AFTER PUT");
         } catch (Exception ex) {
             throw new IllegalStateException(ex.getMessage(), ex);
         }

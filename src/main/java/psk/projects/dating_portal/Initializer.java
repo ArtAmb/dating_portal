@@ -3,6 +3,7 @@ package psk.projects.dating_portal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import psk.projects.dating_portal.auth.*;
+import psk.projects.dating_portal.chat.ChatRepository;
 import psk.projects.dating_portal.tags.CategoryTestService;
 
 import javax.annotation.PostConstruct;
@@ -18,6 +19,7 @@ public class Initializer {
     private final CreateUserService createUserService;
     private final CategoryTestService categoryTestService;
     private final UserRepository userRepo;
+    private final ChatRepository chatRepository;
 
 
     @PostConstruct
@@ -45,6 +47,7 @@ public class Initializer {
     private void initSystem() {
         categoryTestService.deleteAll();
         categoryTestService.initTags();
+        chatRepository.deleteAll();
 
 
         List<Long> ids = new LinkedList<>();

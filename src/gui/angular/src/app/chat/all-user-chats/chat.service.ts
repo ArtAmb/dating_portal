@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
+import { ChatMessage } from "./chat/chat.component";
 @Injectable({
   providedIn: "root"
 })
@@ -26,6 +27,21 @@ export class ChatService {
     return this.http.post(environment.server_url + "/add-message", arg0);
   }
 
+  public getMessages(
+    chatId: number,
+    allMsgCount: number,
+    limit: number
+  ): Observable<Array<ChatMessage>> {
+    return this.http.get<Array<ChatMessage>>(
+      environment.server_url +
+        "/chat/" +
+        chatId +
+        "/read-msg-count/" +
+        allMsgCount +
+        "/limit/" +
+        limit
+    );
+  }
 
   public addNewMessage(arg0: {
     chatId: number;

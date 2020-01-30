@@ -1,10 +1,7 @@
 package psk.projects.dating_portal.chat;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -25,10 +22,15 @@ public class ChatRestController {
         return chatService.addNewMessage(command);
     }
 
-
     @GetMapping("get-all-chats")
     public List<ChatViewDTO> getAllChats(Principal principal) {
         return chatService.getAllChats(principal);
+    }
+
+
+    @GetMapping("chat/{chatId}/read-msg-count/{msgCount}/limit/{limit}")
+    public List<Message> getChatMessages(@PathVariable Long chatId, @PathVariable Integer msgCount, @PathVariable Integer limit) {
+        return chatService.getChat(chatId, msgCount, limit);
     }
 
 }
