@@ -28,7 +28,12 @@ public class UserSearchInfo {
 
     String tagsInfo;
 
+    @Enumerated
+    @Column(nullable = false)
     GENDER preferredGender;
+
+    @Enumerated
+    @Column(nullable = false)
     REGION preferredRegion;
 }
 

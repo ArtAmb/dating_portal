@@ -68,6 +68,8 @@ public class CreateUserService {
         UserSearchInfo searchConfig = UserSearchInfo.builder()
                 .userId(userId)
                 .algorithmType(PartnerSearchAlgorithm.LOOKING_FOR_MYSELF)
+                .preferredGender(GENDER.Default)
+                .preferredRegion(REGION.Default)
                 .tagsInfo("").build();
 
         userSearchInfoRepository.save(searchConfig);
