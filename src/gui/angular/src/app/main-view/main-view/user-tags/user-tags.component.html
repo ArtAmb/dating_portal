@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col" *ngFor="let oneTagsCategory of allTagsCategory">
-    <div class="row">{{oneTagsCategory.name}}</div>
+  <div class="col tags-from-cat" *ngFor="let oneTagsCategory of allTagsCategory">
+    <div class="row ont-weight-bold h5 mb-2">{{oneTagsCategory.name}}</div>
     <div *ngFor="let oneTag of oneTagsCategory.tags">
         <app-user-tag [tag]="oneTag" [context]="context"></app-user-tag>
     </div>

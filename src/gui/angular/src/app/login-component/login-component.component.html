@@ -1,25 +1,19 @@
-<button class="row" (click)="tryToGetToAuthorizedMethod()">GET DO autoryzowanej metody</button>
-<button class="row" (click)="checkIfAuthorized()">GET PRINCIPAL</button>
-
-<div class="row"> </div>
-<button class="row" (click)="switchContext()">Zmień</button>
-<div class="row"> </div>
-<div class="row"> </div>
+<p class="info"> Zaloguj się do konta. Jeśli go jeszcze nie masz zarejestruj się</p>
+<button class="row block-center" (click)="switchContext()">Login / Rejestracja </button>
 
 <div *ngIf="mode == 'LOGIN'">
-  <input class="row" [(ngModel)]="user.login" placeholder="login" />
-  <input class="row" [(ngModel)]="user.password" placeholder="hasło" />
+  <p class="info">Zaloguj się do portalu</p>
+  <input class="row block-center" [(ngModel)]="user.login" placeholder="login" />
+  <input class="row block-center" [(ngModel)]="user.password" placeholder="hasło" />
 
-  <button class="row" (click)="login()">Zaloguj</button>
+  <button class="row block-center" (click)="login()">Zaloguj</button>
 </div>
 
 <div *ngIf="mode == 'REGISTER'">
-  <input class="row" [(ngModel)]="user.email" placeholder="email" />
-  <input class="row" [(ngModel)]="user.login" placeholder="login" />
-  <input class="row" [(ngModel)]="user.password" placeholder="hasło" />
+  <p class="info"> Załóż konto</p>
+  <input class="row block-center" [(ngModel)]="user.email" placeholder="email" />
+  <input class="row block-center" [(ngModel)]="user.login" placeholder="login" />
+  <input class="row block-center" [(ngModel)]="user.password" placeholder="hasło" />
 
-  <button class="row" (click)="register()">Zarejestruj</button>
+  <button class="row block-center" (click)="register()">Zarejestruj</button>
 </div>
-
-
-

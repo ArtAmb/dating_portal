@@ -1,14 +1,16 @@
 .gallery {
-  overflow: auto !important; 
-  white-space: nowrap;
+  overflow: auto !important;
+  white-space: pre-wrap;
   display: block;
-  width: 80%; 
+  width: 100%;
 }
-.image-container {
+.image-container-outer {
   display: inline-block;
+  width: 33%;
 }
 .image {
   display: inline-block;
   width: 150px;
   height: 150px;
 }
+

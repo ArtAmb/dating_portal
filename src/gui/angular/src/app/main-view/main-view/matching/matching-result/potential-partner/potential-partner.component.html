@@ -1,25 +1,26 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h4 class="row">{{ potentialPartner.login }}</h4>
-      <div class="row">
+<div class="container mb-3 ">
+  <div class="row ">
+    <div class="col mb-1 border border-dark">
+      <h4 class="row border-bottom border-dark mb-0">{{ potentialPartner.login }}</h4>
+      <div class="row p-0">
         <div class="col">
           <app-image
             *ngIf="avatarImage && avatarImage.imageId"
             [image]="avatarImage"
           ></app-image>
         </div>
-        <div class="col">
-          <div class="row">{{ potentialPartner.description }}</div>
-          <div class="row">{{ potentialPartner.matchingRate }}</div>
+        <div class="col border-left border-dark">
+          <div class="row px-2">{{ potentialPartner.description }}</div>
+          <div class="row px-2">{{ potentialPartner.matchingRate }}</div>
         </div>
-        <div class="col">
-          <button class="row" (click)="invite()">Zaproś</button>
-          <button class="row" (click)="sendMessage()">Napisz wiadomość</button>
-          <button class="row" (click)="showMore()">Więcej</button>
+        <div class="col p-0 m-0">
+          <button class="btn-full" (click)="invite()">Zaproś</button>
+          <button class="btn-full" (click)="sendMessage()">Napisz wiadomość</button>
+          <button class="btn-full" (click)="showMore()">Więcej</button>
         </div>
       </div>
     </div>
+
   </div>
   <div class="row">
     <span

@@ -1,6 +1,6 @@
 <div class="image-container" *ngIf="!fullPictureContext">
   <img class="image" [src]="createImgUrl()" (click)="imageOnClick()"/>
-  
+
 </div>
 <div *ngIf="fullPictureContext">
   <img class="image-full" [src]="createImgUrl()" />

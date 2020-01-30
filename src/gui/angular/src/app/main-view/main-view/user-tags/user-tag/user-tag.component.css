@@ -1,0 +1,34 @@
+select#divshow {
+    padding: 5px 3px;
+
+}
+select option[value="LOVE"] {
+    background:  red;
+    color:#fff;
+}
+
+select option[value="LOVE"] {
+    background:  red;
+    color:#fff;
+}
+select option[value="LIKE"] {
+    background: darkgreen;
+    color:#fff;
+}
+
+select option[value="NORMAL"] {
+    background: olivedrab;
+    color:#fff;
+}
+
+select option[value="NOT_LIKE"] {
+    background: brown;
+    color:#fff;
+
+}
+
+select option[value="HATE"] {
+    background: black;
+    color:#fff;
+}
+
